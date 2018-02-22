@@ -22,6 +22,7 @@ namespace WeatherForecast
                     using (IHttpContent content = response.Content)
                     {
                         var json = await content.ReadAsStringAsync();
+
                         Debug.WriteLine("In async method");
                     }
                 }
