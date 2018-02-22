@@ -27,21 +27,9 @@ namespace WeatherForecast
         public MainPage()
         {
             this.InitializeComponent();
-            Debug.WriteLine("Hello world");
-            try
-            {
-               var result= Forecast.getWeather().Wait();
-            }
-            catch (Exception ex)
-            {
-                WriteLine($"There was an exception: {ex.ToString()}");
-            }
-            var task = TaskEx.RunEx(async () => await MyAsyncMethod());
-            var result = task.WaitAndUnwrapException();
-            var result = Forecast.Run(MyAsyncMethod);
-            await Forecast.getWeather();
-          //  var task = Forecast.getWeather();
-            var result = task.WaitAndUnwrapException();
+            
+            (new Forecast()).GetWeather();
+           
         }
     }
 }

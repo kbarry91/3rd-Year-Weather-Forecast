@@ -81,5 +81,10 @@ namespace WeatherForecast
         public int cnt { get; set; }
         public List<List> list { get; set; }
         public City city { get; set; }
+
+        public override string ToString()
+        {
+            return " in root object";
+        }
     }
 }

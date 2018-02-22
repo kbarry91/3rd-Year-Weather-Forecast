@@ -6,60 +6,37 @@ using System.Threading.Tasks;
 using System.Net;
 using Windows.Web.Http;//HttpClient;
 using System.Diagnostics;
+using Newtonsoft.Json;
 //using System.Net.Http.HttpClient;
 namespace WeatherForecast
 {
     class Forecast
     {
-        public async Task getWeather()
+        public async void GetWeather()
         {
-           // string url = "http://api.openweathermap.org/data/2.5/weather?id=2964179&APPID=833dac87e9be3b3f86533d84b6064a84";
-            var uri = new Uri("http://api.openweathermap.org/data/2.5/weather?id=2964179&APPID=833dac87e9be3b3f86533d84b6064a84");
+             string url = "http://api.openweathermap.org/data/2.5/weather?id=2964179&APPID=833dac87e9be3b3f86533d84b6064a84";
+
+            // adapted from https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
+            var uri = new Uri(url);
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {
                     using (IHttpContent content = response.Content)
                     {
-                        var json = await content.ReadAsStringAsync();
+                         var json = await content.ReadAsStringAsync();
+                        // adapted from https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
+                        //var json = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<RootObject>(json);
 
                         Debug.WriteLine("In async method");
-                    }
-                }
-            }
-        }
-        /*
-        public static void getWeather()
-        {
-            // adapted from https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
-            var client = new System.Net.HttpClient();
-            using (var webClient = new System.Net.WebClient())
-            {
-                var json = webClient.DownloadString(URL);
-                // Now parse with JSON.Net
-            }
-            using (HttpClient wc = new HttpClient())
-            {
-                //id=2964179 city code for galway
-                // APPID = 833dac87e9be3b3f86533d84b6064a84 key for api
-                var json = wc.DownloadString("http://api.openweathermap.org/data/2.5/weather?id=2964179&APPID=833dac87e9be3b3f86533d84b6064a84");
-            }
-        }//getWeather
-        public async Task AsyncMethod()
-        {
-            string url = "http://api.openweathermap.org/data/2.5/weather?id=2964179&APPID=833dac87e9be3b3f86533d84b6064a84";
+                        Debug.WriteLine( result.ToString());
+                        Debug.WriteLine(result+ "" +result.list);
 
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = await client.GetAsync(url))
-                {
-                    using (HttpContent content = response.Content)
-                    {
-                        var json = await content.ReadAsStringAsync();
                     }
                 }
             }
         }
-        */
+       
     }
 }
