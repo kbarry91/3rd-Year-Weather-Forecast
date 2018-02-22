@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,6 +27,21 @@ namespace WeatherForecast
         public MainPage()
         {
             this.InitializeComponent();
+            Debug.WriteLine("Hello world");
+            try
+            {
+               var result= Forecast.getWeather().Wait();
+            }
+            catch (Exception ex)
+            {
+                WriteLine($"There was an exception: {ex.ToString()}");
+            }
+            var task = TaskEx.RunEx(async () => await MyAsyncMethod());
+            var result = task.WaitAndUnwrapException();
+            var result = Forecast.Run(MyAsyncMethod);
+            await Forecast.getWeather();
+          //  var task = Forecast.getWeather();
+            var result = task.WaitAndUnwrapException();
         }
     }
 }
