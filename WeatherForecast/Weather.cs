@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,13 @@ namespace WeatherForecast
         public double grnd_level { get; set; }
         public int humidity { get; set; }
         public double temp_kf { get; set; }
+
+        public override string ToString()
+        {
+            var celsius = temp - 273.15;
+            var str= "celsius" + celsius;
+            return str;
+        }
     }
 
     public class Weather
@@ -25,6 +33,11 @@ namespace WeatherForecast
         public string main { get; set; }
         public string description { get; set; }
         public string icon { get; set; }
+        public override string ToString()
+        {
+            
+            return description;
+        }
     }
 
     public class Clouds
@@ -36,6 +49,10 @@ namespace WeatherForecast
     {
         public double speed { get; set; }
         public double deg { get; set; }
+    }
+    public class Rain
+    {
+        public double? __invalid_name__3h { get; set; }
     }
 
     public class Snow
@@ -55,9 +72,24 @@ namespace WeatherForecast
         public List<Weather> weather { get; set; }
         public Clouds clouds { get; set; }
         public Wind wind { get; set; }
+        public Rain rain { get; set; }
         public Snow snow { get; set; }
         public Sys sys { get; set; }
         public string dt_txt { get; set; }
+
+        public override string ToString()
+        {
+            
+            var myStr = "";
+            foreach (var myWeather in weather)
+            {
+              
+                //  Debug.WriteLine(myWeather.ToString());
+                myStr = myStr + dt_txt + " " + myWeather.ToString() ;
+
+            } 
+            return myStr+" celcius:"+main.ToString();
+        }
     }
 
     public class Coord
@@ -84,7 +116,13 @@ namespace WeatherForecast
 
         public override string ToString()
         {
-            return " in root object";
+            var myStr = "";
+            foreach (var mylist in list)
+            {
+                myStr = myStr + mylist.ToString();
+                Debug.WriteLine(mylist.ToString());
+            }
+            return " in root object"+cod;
         }
     }
 }
