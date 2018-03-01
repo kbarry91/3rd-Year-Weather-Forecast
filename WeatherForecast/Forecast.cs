@@ -15,9 +15,14 @@ namespace WeatherForecast
         /*
          GetWeather initilizes a result onject with all of the selected counties data
          */
-        public async void GetWeather()
+        public List<List<WeatherController>> sortedDays { get; set; }
+
+        public async void GetWeather(string cCode)
         {
-            string url = "http://api.openweathermap.org/data/2.5/forecast?id=2964179&APPID=833dac87e9be3b3f86533d84b6064a84";
+            string cityCode = cCode;
+            string apiKey = "&APPID=833dac87e9be3b3f86533d84b6064a84";
+            // string cityCode = "id=2964179";
+            string url = "http://api.openweathermap.org/data/2.5/forecast?" + cityCode + apiKey;
 
             // adapted from https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
             var uri = new Uri(url);
@@ -31,8 +36,10 @@ namespace WeatherForecast
                         // adapted from https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
                         var result = JsonConvert.DeserializeObject<RootObject>(json);
 
-                        //create a list of weatherController lists to hold each day
-                        List<List<WeatherController>> sortedDays = new List<List<WeatherController>>();
+                        // create a list of weatherController lists to hold each day
+                        // made public for global access
+                        //  List<List<WeatherController>> sortedDays = new List<List<WeatherController>>();
+                        sortedDays = new List<List<WeatherController>>();
 
                         //create a list of weatherController objects to hold each hourly interval
                         List<WeatherController> sortedHours = new List<WeatherController>();
@@ -50,14 +57,15 @@ namespace WeatherForecast
                                 sortedDays.Add(sortedHours);
                                 sortedHours = new List<WeatherController>();
                             }
-                            WeatherController wController = new WeatherController();
-
-                            wController.dtime = result.list[counter].dt_txt;
-                            wController.dayOfWeek = (Convert.ToDateTime(result.list[counter].dt_txt).DayOfWeek).ToString();
-                            wController.temp = result.list[counter].main.temp;
-                            wController.humidity = result.list[counter].main.humidity;
-                            wController.desc = result.list[counter].weather[0].description;
-                            wController.windSpeed = result.list[counter].wind.speed;
+                            WeatherController wController = new WeatherController
+                            {
+                                dtime = result.list[counter].dt_txt,
+                                dayOfWeek = (Convert.ToDateTime(result.list[counter].dt_txt).DayOfWeek).ToString(),
+                                temp = result.list[counter].main.temp,
+                                humidity = result.list[counter].main.humidity,
+                                desc = result.list[counter].weather[0].description,
+                                windSpeed = result.list[counter].wind.speed
+                            };
                             sortedHours.Add(wController);
 
                             prevDate = Convert.ToDateTime(result.list[counter].dt_txt);

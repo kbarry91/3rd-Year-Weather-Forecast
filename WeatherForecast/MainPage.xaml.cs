@@ -24,27 +24,33 @@ namespace WeatherForecast
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public String userCity { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
-            
-            (new Forecast()).GetWeather();
+            DataContext = this;
+            //string cityCode = "id=2964179";
+            //(new Forecast()).GetWeather(cityCode);
 
-            string idate = "2018-03-05 15:00:00";
-            string idate2 = "2018-03-02";
-            DateTime oDate = Convert.ToDateTime(idate);
-            DateTime oDate2 = Convert.ToDateTime(idate2);
-            Debug.WriteLine("forecastparsed");
+            //DEBUG
+            Debug.WriteLine("DEBUG : end of mainpage reached");
+        }
 
-            if (oDate < oDate2)
+        private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //DEBUG Debug.WriteLine("DEBUG : CityButton Tapped");
+            String userText = cityInput.Text;
+            Debug.WriteLine("DEBUG : User input =" + userText);
+
+            string cityCode;
+            if (userText.Equals("galway", StringComparison.CurrentCultureIgnoreCase))
             {
-                Debug.WriteLine(oDate.Day + " " + oDate.Month + "  " + oDate.Year+" is first");
+                cityCode = "id=2964179";
+                (new Forecast()).GetWeather(cityCode);
+                this.Frame.Navigate(typeof(WeatherPage));
             }
-            else
-            {
-                Debug.WriteLine(oDate2.Day + " " + oDate2.Month + "  " + oDate2.Year+"is first");
-            }
-            Debug.WriteLine(oDate.Day + " " + oDate.Month + "  " + oDate.Year);
+
         }
     }
 }

@@ -6,8 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    
+    <StackPanel Margin="50,50,50,50">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBox x:Name="cityInput" Width="500" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
+            <Button x:Name="cityButton" Margin="680,300,0,668" Tapped="cityButton_Tapped" HorizontalAlignment="Center">Search for city</Button>
+        </Grid>
+    </StackPanel>
 </Page>
