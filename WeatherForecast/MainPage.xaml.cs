@@ -29,7 +29,22 @@ namespace WeatherForecast
             this.InitializeComponent();
             
             (new Forecast()).GetWeather();
-           
+
+            string idate = "2018-03-05 15:00:00";
+            string idate2 = "2018-03-02";
+            DateTime oDate = Convert.ToDateTime(idate);
+            DateTime oDate2 = Convert.ToDateTime(idate2);
+            Debug.WriteLine("forecastparsed");
+
+            if (oDate < oDate2)
+            {
+                Debug.WriteLine(oDate.Day + " " + oDate.Month + "  " + oDate.Year+" is first");
+            }
+            else
+            {
+                Debug.WriteLine(oDate2.Day + " " + oDate2.Month + "  " + oDate2.Year+"is first");
+            }
+            Debug.WriteLine(oDate.Day + " " + oDate.Month + "  " + oDate.Year);
         }
     }
 }

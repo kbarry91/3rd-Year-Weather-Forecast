@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WeatherForecast
 {
-  
+
     public class Main
     {
         public double temp { get; set; }
@@ -21,8 +21,9 @@ namespace WeatherForecast
 
         public override string ToString()
         {
-            var celsius = temp - 273.15;
-            var str= "celsius" + celsius;
+            // converts tempeture from kelvin to degrees and truncates to 2 deciaml places
+            var celsius = Math.Truncate((temp - 273.15) * 100) / 100;
+            var str = " celsius" + celsius + " humidity" + humidity;
             return str;
         }
     }
@@ -35,7 +36,7 @@ namespace WeatherForecast
         public string icon { get; set; }
         public override string ToString()
         {
-            
+
             return description;
         }
     }
@@ -49,6 +50,7 @@ namespace WeatherForecast
     {
         public double speed { get; set; }
         public double deg { get; set; }
+
     }
     public class Rain
     {
@@ -79,16 +81,16 @@ namespace WeatherForecast
 
         public override string ToString()
         {
-            
+
             var myStr = "";
             foreach (var myWeather in weather)
             {
-              
-                //  Debug.WriteLine(myWeather.ToString());
-                myStr = myStr + dt_txt + " " + myWeather.ToString() ;
 
-            } 
-            return myStr+" celcius:"+main.ToString();
+                //  Debug.WriteLine(myWeather.ToString());
+                myStr = myStr + main.ToString() + dt_txt + " " + myWeather.ToString();
+
+            }
+            return myStr + main.ToString();
         }
     }
 
@@ -116,13 +118,15 @@ namespace WeatherForecast
 
         public override string ToString()
         {
+            var count = 0;
             var myStr = "";
             foreach (var mylist in list)
             {
-                myStr = myStr + mylist.ToString();
-                Debug.WriteLine(mylist.ToString());
+                count++;
+                myStr = myStr + mylist.ToString() + " c " + count + "\n";
+                // Debug.WriteLine(mylist.ToString());
             }
-            return " in root object"+cod;
+            return myStr;
         }
     }
 }
