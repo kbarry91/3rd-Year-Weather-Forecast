@@ -47,8 +47,8 @@ namespace WeatherForecast
             if (userText.Equals("galway", StringComparison.CurrentCultureIgnoreCase))
             {
                 cityCode = "id=2964179";
-                (new Forecast()).GetWeather(cityCode);
-                this.Frame.Navigate(typeof(WeatherPage));
+                // (new Forecast()).GetWeather(cityCode);
+                Frame.Navigate(typeof(WeatherPage));
             }
 
         }
