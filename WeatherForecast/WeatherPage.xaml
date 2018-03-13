@@ -9,7 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         
-        <Pivot x:Name="pvtWeather"  Margin="100,100,100,100">
+        <Pivot x:Name="pvtWeather"  Margin="100,100,100,100" Height="1200" HorizontalAlignment="Center"  >
             
               
            

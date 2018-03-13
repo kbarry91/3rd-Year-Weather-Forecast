@@ -49,7 +49,12 @@ namespace WeatherForecast
 
             //dynamically add a pivot item
             PivotItem pvt;
-
+            ScrollViewer
+                     // Define a ScrollViewer
+                     scroll = new ScrollViewer
+                     {
+                         VerticalScrollBarVisibility = ScrollBarVisibility.Visible
+                     };
             //loop through SortedDays to seperate Day and hour forecasts 
             int xCount = 0, yCount = 0;
             foreach (var sd in myForecast.SortedDays)
@@ -57,9 +62,11 @@ namespace WeatherForecast
                 pvt = new PivotItem
                 {
                     Header = myForecast.SortedDays[xCount][0].dayOfWeek
+                    
                 };
-                var dayStack = new StackPanel();
-
+            //    var dayStack = new StackPanel();
+                ListView listView1 = new ListView();
+                listView1.HorizontalContentAlignment = HorizontalAlignment.Center;
                 foreach (var sh in sd)
                 {
                     var hourStack = new StackPanel
@@ -101,18 +108,22 @@ namespace WeatherForecast
 
                     // append hourStack to dayStack
                     yCount++;
-                    dayStack.Children.Add(hourStack);
+                    //dayStack.Children.Add(hourStack);
+                    listView1.Items.Add(hourStack);
                 }
 
                 // set dayStack as pivots content
-                pvt.Content = dayStack;
-
+                pvt.Content = listView1;
+                
                 // add pivotItem to pivot
                 pvtWeather.Items.Add(pvt);
+
                 pvt = null;
                 xCount++;
                 yCount = 0;
             }
+            
+           
         }
 
     }
