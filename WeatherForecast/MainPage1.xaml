@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="WeatherForecast.WeatherPage"
+    x:Class="WeatherForecast.MainPage1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WeatherForecast"
@@ -9,9 +9,5 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Pivot x:Name="pvtWeather"  Margin="100,100,100,100" Height="500"    >
-           
-
-        </Pivot>
     </Grid>
 </Page>
