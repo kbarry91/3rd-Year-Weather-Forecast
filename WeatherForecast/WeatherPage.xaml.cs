@@ -33,13 +33,11 @@ namespace WeatherForecast
             Debug.WriteLine("DEBUG : WeatherPage");
             this.InitializeComponent();
 
-             myForecast = new Forecast();
-             BuildweatherAsync();
-            // Task task =myForecast.GetWeather("id=2964179");
-            // Forecast myfor =  new Forecast().GetWeather("uyuy");
-            //myForecast.GetWeather("id=2964179");//.GetAwaiter().GetResult();
+            myForecast = new Forecast();
+            BuildweatherAsync();
 
-            // Debug.WriteLine("DEBUG IN WEATHERPAGE: " + myForecast.SortedDays[1][1].desc);
+            //myForecast.GetWeather("id=2964179");//.GetAwaiter().GetResult();
+            Debug.WriteLine("DEBUG IN WEATHERPAGE MAIN METHOD: ");
         }
         public async Task BuildweatherAsync()
         {
@@ -48,9 +46,75 @@ namespace WeatherForecast
 
             await myForecast.GetWeather("id=2964179");//.GetAwaiter().GetResult();
 
-            Debug.WriteLine("DEBUG IN WEATHERPAGE: " + myForecast.SortedDays[4][2].desc);
+
+            //dynamically add a pivot item
+            PivotItem pvt;
+
+            //loop through SortedDays to seperate Day and hour forecasts 
+            int xCount = 0, yCount = 0;
+            foreach (var sd in myForecast.SortedDays)
+            {
+                pvt = new PivotItem
+                {
+                    Header = myForecast.SortedDays[xCount][0].dayOfWeek
+                };
+                var dayStack = new StackPanel();
+
+                foreach (var sh in sd)
+                {
+                    var hourStack = new StackPanel
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center
+
+                    };
+
+                    var timeBlock = new TextBlock
+                    {
+                        Text = myForecast.SortedDays[xCount][yCount].dtime,
+                        FontSize = 30
+                    };
+                    hourStack.Children.Add(timeBlock);
+
+                    var tempBlock = new TextBlock
+                    {
+                        Text = "Tempeture (c)\t:" + System.Convert.ToString(Math.Truncate((myForecast.SortedDays[xCount][yCount].temp - 273.15) * 100) / 100)
+                    };
+                    hourStack.Children.Add(tempBlock);
+
+                    var descBlock = new TextBlock
+                    {
+                        Text = myForecast.SortedDays[xCount][yCount].desc
+                    };
+                    hourStack.Children.Add(descBlock);
+
+                    var windBlock = new TextBlock
+                    {
+                        Text = "Windspeed\t:" + System.Convert.ToString(myForecast.SortedDays[xCount][yCount].windSpeed)
+                    };
+                    hourStack.Children.Add(windBlock);
+
+                    var humBlock = new TextBlock
+                    {
+                        Text = "Humidity\t:" + System.Convert.ToString(myForecast.SortedDays[xCount][yCount].humidity)
+                    };
+                    hourStack.Children.Add(humBlock);
+
+                    // append hourStack to dayStack
+                    yCount++;
+                    dayStack.Children.Add(hourStack);
+                }
+
+                // set dayStack as pivots content
+                pvt.Content = dayStack;
+
+                // add pivotItem to pivot
+                pvtWeather.Items.Add(pvt);
+                pvt = null;
+                xCount++;
+                yCount = 0;
+            }
         }
-       
+
     }
 
 }

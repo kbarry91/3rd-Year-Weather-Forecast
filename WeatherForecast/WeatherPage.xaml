@@ -8,9 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-        <TextBox x:Name="tester" Width="500" Height="100" Header="Choose City" PlaceholderText="just a test page."  HorizontalAlignment="Center" Text="{Binding Forecast.sortedDays[1][1]}"/>
-        <TextBlock x:Name="testtext" Width="500" Height="100"   HorizontalAlignment="Center" />
-        </StackPanel>
+        
+        <Pivot x:Name="pvtWeather"  Margin="100,100,100,100">
+            
+              
+           
+        </Pivot>
     </Grid>
 </Page>
