@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net;
 using System.Diagnostics;
-
+using Windows.Devices.Geolocation;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace WeatherForecast
@@ -24,10 +24,13 @@ namespace WeatherForecast
     /// </summary>
     public sealed partial class MainPage : Page
     {
+       // var accessStatus = await Geolocator.RequestAccessAsync();
+
         public String userCity { get; set; }
 
         public MainPage()
         {
+            //request permission for location
             this.InitializeComponent();
             DataContext = this;
             //string cityCode = "id=2964179";
@@ -46,9 +49,12 @@ namespace WeatherForecast
             string cityCode;
             if (userText.Equals("galway", StringComparison.CurrentCultureIgnoreCase))
             {
-                cityCode = "id=2964179";
+                  cityCode = "id=2964179";
+                //cityCode = "galway";
+                cityCode = "lat=53.333328&lon=-9";
                 // (new Forecast()).GetWeather(cityCode);
-                Frame.Navigate(typeof(WeatherPage));
+                
+                Frame.Navigate(typeof(WeatherPage),cityCode);
             }
 
         }
