@@ -47,14 +47,15 @@ namespace WeatherForecast
             Debug.WriteLine("DEBUG IN WEATHERPAGE MAIN METHOD: ");
         }
 
-        // trying to get variable from mainPage
+        // Recieve city name variable from mainPage
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            this.cityCode = "q=" + e.Parameter.ToString();
+           this.cityCode =  e.Parameter.ToString();
+           // this.cityCode = "lat=53.3488&lon=-6.2482";
             this.cityName = e.Parameter.ToString();
             myForecast = new Forecast();
-            BuildweatherAsync(cityCode);
+           var buildWeather = BuildweatherAsync(cityCode);
         }
 
         public async Task BuildweatherAsync(String cityCode)

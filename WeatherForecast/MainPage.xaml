@@ -7,12 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Margin="50,50,50,50">
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBox x:Name="cityInput" Width="500" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
-                <Button x:Name="cityButton" Tapped="cityButton_Tapped" HorizontalAlignment="Center">Search for city</Button>
-                <TextBlock x:Name="errorBox" Visibility="Collapsed" Text="Please enter a city name" Foreground="Red" ></TextBlock>
+    <StackPanel Margin="50,50,50,50" Background="LightBlue">
+        <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">-->
+        <Grid Background="LightBlue">
+            <StackPanel>
+                
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBox x:Name="cityInput" Width="500" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
+                    <Button x:Name="cityButton" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
+                    <TextBlock x:Name="errorBox" Visibility="Collapsed" Text="Please enter a city name" Foreground="Red" ></TextBlock>
+                </StackPanel>
+                
+                <StackPanel>
+                    <Button x:Name="getLocation" Width="200" Height="100" Tapped="getLocation_Tapped" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">Get Your Current Location</Button>
+                    <TextBlock x:Name="userLocation" Visibility="Collapsed"  Foreground="Blue" HorizontalAlignment="Center" ></TextBlock>
+                    <Button x:Name="getLocForecast" Width="200" Height="100" Visibility="Collapsed" Click="getLocForecast_Click" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">
+                        <TextBlock Text="Get the Forecast for your current location"  TextWrapping="Wrap" TextAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+                
             </StackPanel>
         </Grid>
     </StackPanel>
