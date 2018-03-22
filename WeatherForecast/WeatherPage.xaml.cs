@@ -23,10 +23,6 @@ using System.Collections.ObjectModel;
 
 namespace WeatherForecast
 {
-    /// <summary>
-    /// A page to view forecasts
-    /// </summary>
-    /// 
 
     //public ObservableCollection<Daylist> daylists { get; set; }
 
@@ -36,7 +32,8 @@ namespace WeatherForecast
         Forecast myForecast;
         public String SearchCrit { get; set; }
         public String cityCode { get; set; }
-        
+        public String cityName { get; set; }
+
         public WeatherPage()
         {
             String cityCode;
@@ -44,7 +41,7 @@ namespace WeatherForecast
             this.InitializeComponent();
 
             //myForecast = new Forecast();
-           // BuildweatherAsync(cityCode);
+            // BuildweatherAsync(cityCode);
 
             //myForecast.GetWeather("id=2964179");//.GetAwaiter().GetResult();
             Debug.WriteLine("DEBUG IN WEATHERPAGE MAIN METHOD: ");
@@ -54,120 +51,58 @@ namespace WeatherForecast
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-             this.cityCode = e.Parameter.ToString();
+            this.cityCode = "q=" + e.Parameter.ToString();
+            this.cityName = e.Parameter.ToString();
             myForecast = new Forecast();
-             BuildweatherAsync(cityCode);
+            BuildweatherAsync(cityCode);
         }
 
         public async Task BuildweatherAsync(String cityCode)
         {
             //DEBUG 
-            Debug.WriteLine("DEBUG : BuildWeatherAsync"+ " citycode:"+cityCode);
+            Debug.WriteLine("DEBUG : BuildWeatherAsync" + " citycode:" + cityCode);
 
             await myForecast.GetWeather(cityCode);//.GetAwaiter().GetResult();
-            // 2965767
-            //wait myForecast.GetWeather("id=2147714");//.GetAwaiter().GetResult();
+                                                  // 2965767
+                                                  //wait myForecast.GetWeather("id=2147714");//.GetAwaiter().GetResult();
 
-            // CURRENT METHOD OF ADDING PIVOT
-            PivotItem pvt;
 
-            ScrollViewer
-                     // Define a ScrollViewer
-                     scroll = new ScrollViewer
-                     {
-                         VerticalScrollBarVisibility = ScrollBarVisibility.Visible
-                     };
 
-            //loop through SortedDays to seperate Day and hour forecasts 
-            int xCount = 0, yCount = 0;
-            foreach (var sd in myForecast.SortedDays)
+            if (myForecast.httpSuccess)
             {
+                this.cityName = myForecast.SortedDays[0][0].city;
+            }
+            else
+            {
+                this.cityName = cityName + " not found !";
+            }
 
-                pvt = new PivotItem
+            cityBox.Text = cityName;
+            int index = 0;
+            foreach (var day in myForecast.SortedDays)
+            {
+                var weathers = new ObservableCollection<WeatherController>();
+                foreach (var weatherItem in day)
                 {
-                    Header = myForecast.SortedDays[xCount][0].dayOfWeek + "\n" + Convert.ToDateTime(myForecast.SortedDays[xCount][0].dtime).ToString("MMM d"),
-                    HorizontalAlignment = HorizontalAlignment.Stretch
-                };
-
-                //    var dayStack = new StackPanel();
-                Grid grid = new Grid();
-                ListView listView1 = new ListView
-                {
-                    HorizontalContentAlignment = HorizontalAlignment.Center
-                };
-
-                foreach (var sh in sd)
-                {
-                    var hourStack = new StackPanel
-                    {
-                        HorizontalAlignment = HorizontalAlignment.Center
-
-                    };
-
-                    var timeBlock = new TextBlock
-                    {
-                        Text = myForecast.SortedDays[xCount][yCount].dtime,
-                        FontSize = 30,
-                    };
-                    hourStack.Children.Add(timeBlock);
-
-                    var tempBlock = new TextBlock
-                    {
-                        Text = "Tempeture (c)\t:" + System.Convert.ToString(Math.Truncate((myForecast.SortedDays[xCount][yCount].temp - 273.15) * 100) / 100)
-                    };
-                    hourStack.Children.Add(tempBlock);
-
-                    var descBlock = new TextBlock
-                    {
-                        Text = myForecast.SortedDays[xCount][yCount].desc
-                    };
-                    hourStack.Children.Add(descBlock);
-
-                    var windBlock = new TextBlock
-                    {
-                        Text = "Windspeed\t:" + System.Convert.ToString(myForecast.SortedDays[xCount][yCount].windSpeed)
-                    };
-                    hourStack.Children.Add(windBlock);
-
-                    var humBlock = new TextBlock
-                    {
-                        Text = "Humidity\t:" + System.Convert.ToString(myForecast.SortedDays[xCount][yCount].humidity)
-                    };
-                    hourStack.Children.Add(humBlock);
-
-                    // append hourStack to dayStack
-                    yCount++;
-                    //dayStack.Children.Add(hourStack);
-                    listView1.Items.Add(hourStack);
+                    weathers.Add(weatherItem);
                 }
 
-                // set dayStack as pivots content
-                pvt.Content = listView1;
+                var pivotItem = new PivotItem
+                {
+                    Header = myForecast.SortedDays[index++][0].dayOfWeek
+                };
+                ListView listView = new ListView
+                {
+                    ItemsSource = weathers
+                };
+                pivotItem.Content = listView;
+                listView.ItemTemplate = ListViewDataTemplate;
+                pvtWeather.Items.Add(pivotItem);
 
-                // add pivotItem to pivot
-                pvtWeather.Items.Add(pvt);
 
-                pvt = null;
-                xCount++;
-                yCount = 0;
             }
-            /////////////////////////// TESTING NEW METHOD TO ADD PIVOT
-/*
-            daylists = new ObservableCollection<Daylist>
-    {
-        new Daylist {Day="Wednesday" ,Temperatures= new ObservableCollection<TimeTemperature>
-        {
-            new TimeTemperature {currenttime="2018-3-14 00:00:00",temperature="7.72",winSpeed="11.67" ,humidity=".95"},
-            new TimeTemperature {currenttime="2018-3-14 01:00:00",temperature="7.72",winSpeed="11.67" ,humidity=".95" },
-            new TimeTemperature {currenttime="2018-3-14 02:20:00",temperature="7.72",winSpeed="11.67" ,humidity=".95"}
-            ...
-        }},
-        new Daylist {Day="Friday" ,Temperatures= new ObservableCollection<TimeTemperature>
-        {
-             new TimeTemperature {currenttime="2018-3-14 00:00:00",temperature="7.72",winSpeed="11.67" ,humidity=".95" }
-        }}
-    };
-*/
+
+
         }
 
         // button to return to main menu
@@ -177,20 +112,6 @@ namespace WeatherForecast
         }
 
     }
-    //// trying new way
-    public class Daylist
-    {
-        public string Day { get; set; }
-        public ObservableCollection<TimeTemperature> Temperatures { get; set; }
-    }
 
-    public class TimeTemperature
-    {
-        public string currenttime { get; set; }
-        public string description { get; set; }
-        public string winSpeed { get; set; }
-        public string humidity { get; set; }
-        public string temperature { get; set; }
-    }
 
 }

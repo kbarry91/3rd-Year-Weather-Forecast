@@ -6,13 +6,42 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Name="ListViewDataTemplate" >
+            
+                <StackPanel BorderBrush="Black" BorderThickness="2" Margin="2" HorizontalAlignment="Center">
+                     <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch">
+                        <TextBlock HorizontalAlignment="Stretch" Text="Temperature: " ></TextBlock>
+                    <TextBlock  HorizontalAlignment="Stretch" Text="{Binding temp}"></TextBlock>
+                        <Image Source="{Binding icon}"></Image>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Time : "></TextBlock>
+                        <TextBlock Text="{Binding dtime}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Description : "></TextBlock>
+                        <TextBlock Text="{Binding desc}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Humidity : "></TextBlock>
+                        <TextBlock Text="{Binding humidity}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Windspeed : "></TextBlock>
+                        <TextBlock Text="{Binding windSpeed}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                
+            
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-       
-            <Button
+        <TextBlock x:Name="cityBox" HorizontalAlignment="Center" FontSize="50"  ></TextBlock>
+        <Button
             x:Name="ReturnToMain" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" BorderThickness="1,1,1,1" FontSize="48" Background="#33B40C0C" BorderBrush="#FFF50B0B" FontFamily="Bauhaus 93" FontWeight="Bold" AutomationProperties.HelpText="Click to return to main" Click="ReturnToMain_Click" >Return To Main</Button>
         <Pivot x:Name="pvtWeather"  Margin="100,100,100,100" Height="500" Background="#FFD4DC7D"  Foreground="LightPink"     >
-           
 
         </Pivot>
         <!-- Plan for new pivot-->

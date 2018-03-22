@@ -24,7 +24,7 @@ namespace WeatherForecast
     /// </summary>
     public sealed partial class MainPage : Page
     {
-       // var accessStatus = await Geolocator.RequestAccessAsync();
+        // var accessStatus = await Geolocator.RequestAccessAsync();
 
         public String userCity { get; set; }
 
@@ -33,8 +33,7 @@ namespace WeatherForecast
             //request permission for location
             this.InitializeComponent();
             DataContext = this;
-            //string cityCode = "id=2964179";
-            //(new Forecast()).GetWeather(cityCode);
+
 
             //DEBUG
             Debug.WriteLine("DEBUG : end of mainpage reached");
@@ -42,19 +41,25 @@ namespace WeatherForecast
 
         private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            //DEBUG Debug.WriteLine("DEBUG : CityButton Tapped");
+
             String userText = cityInput.Text;
             Debug.WriteLine("DEBUG : User input =" + userText);
 
+            //for degug must type galway
             string cityCode;
-            if (userText.Equals("galway", StringComparison.CurrentCultureIgnoreCase))
+            // if (userText.Equals("galway", StringComparison.CurrentCultureIgnoreCase))
+            //  {
+            cityCode = "id=2964179";
+            //cityCode = "galway";
+            cityCode = "lat=53.333328&lon=-9";
+            // (new Forecast()).GetWeather(cityCode);
+            if (userText.Length<3)
             {
-                  cityCode = "id=2964179";
-                //cityCode = "galway";
-                cityCode = "lat=53.333328&lon=-9";
-                // (new Forecast()).GetWeather(cityCode);
-                
-                Frame.Navigate(typeof(WeatherPage),cityCode);
+                errorBox.Visibility = Visibility;
+            }
+            else
+            {
+                Frame.Navigate(typeof(WeatherPage), userText);
             }
 
         }

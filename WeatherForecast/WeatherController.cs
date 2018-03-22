@@ -14,6 +14,8 @@ namespace WeatherForecast
         public int humidity { get; set; }
         public String desc { get; set; }
         public double windSpeed { get; set; }
+        public String icon { get; set; }
+        public String city { get; set; }
 
         public WeatherController()
         {
