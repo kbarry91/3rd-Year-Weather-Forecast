@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Net;
 using System.Diagnostics;
 using Windows.Devices.Geolocation;
+using Windows.Storage;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace WeatherForecast
@@ -42,24 +43,23 @@ namespace WeatherForecast
         private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            String userText = "q=" + cityInput.Text;
+            String userText =  cityInput.Text;
             Debug.WriteLine("DEBUG : User input =" + userText);
 
-            //for degug must type galway
-            string cityCode;
-            // if (userText.Equals("galway", StringComparison.CurrentCultureIgnoreCase))
-            //  {
-            cityCode = "id=2964179";
-            //cityCode = "galway";
-            cityCode = "lat=53.333328&lon=-9";
-            // (new Forecast()).GetWeather(cityCode);
+            
             if (userText.Length<3)
             {
                 errorBox.Visibility = Visibility;
             }
             else
             {
-                Frame.Navigate(typeof(WeatherPage), userText);
+                String citySearch = "q=" + userText;
+                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+
+                //save the search and date in local storage
+                localSettings.Values["prevSearch"] = userText+ " on "+ DateTime.Now.ToString("M/d/yyyy"); 
+                Frame.Navigate(typeof(WeatherPage), citySearch);
             }
 
         }
@@ -85,7 +85,34 @@ namespace WeatherForecast
 
         private void getLocForecast_Click(object sender, RoutedEventArgs e)
         {
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+            //save the search and date in local storage
+            localSettings.Values["prevSearch"] = locationForecast + " on " + DateTime.Now.ToString("M/d/yyyy"); 
             Frame.Navigate(typeof(WeatherPage), locationForecast);
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // load local storage
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+            // if local storage value is available show the prevSearch textbox with date and last search
+            try
+            {
+                var VisibilityPropertyA = Visibility.Visible;
+                prevSearch.Text = "Your last forecast was for " + (string)localSettings.Values["prevSearch"];
+                prevSearch.Visibility = VisibilityPropertyA;
+            }
+            catch
+            {
+                // if no local storage value is available do not show the prevSearch textbox 
+                prevSearch.Text = "No recent searches";
+                var VisibilityPropertyA = Visibility.Collapsed;
+                prevSearch.Visibility = VisibilityPropertyA;
+            }
+            base.OnNavigatedTo(e);
+        }
+
     }
 }
