@@ -7,11 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel  Background="LightBlue" ScrollViewer.VerticalScrollBarVisibility="Visible">
+    <!--<StackPanel  Background="LightBlue" ScrollViewer.VerticalScrollBarVisibility="Visible">-->
         <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">-->
-        <Grid Background="LightBlue">
+        <Grid Background="LightBlue" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <StackPanel>
-                <TextBlock x:Name="titleBar"  Text="Weather Forecast" Foreground="MidnightBlue"  Margin="5,0,5,0" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="titleBar"  Text="My Forecast" Foreground="MidnightBlue"  Margin="0,20,0,1" FontSize="40" HorizontalAlignment="Center"></TextBlock>
                 <ComboBox x:Name="tempType" Header="Temperature format" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
                     <ComboBoxItem x:Name="cel" Content="Celsius"/>
                     <ComboBoxItem x:Name="kel" Content="Kelvin" />
@@ -33,6 +33,41 @@
                     <TextBlock x:Name="prevSearch" HorizontalAlignment="Center" Visibility="{Binding VisibilityPropertyA}" Text="Previous Search" Height="324" Margin="0,20,0,0" ></TextBlock>
                 </StackPanel>
             </StackPanel>
+            <Button Content="About " VerticalAlignment="Bottom" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,10">
+                <Button.Flyout>
+                    <Flyout>
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <StackPanel>
+                            <TextBlock Text="My Forecast" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Center"  Text="With My Forecast you can now get the latest weather updates."  FontWeight="SemiBold" FontStyle="Italic" FontSize="12"/>
+                            <TextBlock HorizontalAlignment="Center" Text="My Forecast gives a 5 day weather forecast."  FontWeight="SemiBold" FontStyle="Italic" FontSize="12"/>
+                            <TextBlock  HorizontalAlignment="Center" Text="Daily Forecasts are given for every 3 hour interval  "  FontWeight="SemiBold" FontStyle="Italic" FontSize="12"/>
+                            <TextBlock Text=""  />
+
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" >
+                            <TextBlock Text="Temperature  Settings"  FontWeight="Bold" FontSize="12"/>
+                            <TextBlock Text="Choose to view in Celsius or Kelvin" FontSize="12"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="City Search"  FontWeight="Bold" FontSize="12"/>
+                            <TextBlock Text="Enter any city name to get a forecast for that city" FontSize="12" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Location Search"  FontWeight="Bold" FontSize="12"/>
+                            <TextBlock Text="Get your current co-ordinates and retrieve the forecast" FontSize="12"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Storage"  FontWeight="Bold" FontSize="12"/>
+                            <TextBlock Text="Chosen Temperature setting is saved for next use" FontSize="12"/>
+                            <TextBlock Text="Your most recent Forecast is saved" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Flyout>
+                </Button.Flyout>
+            </Button>
         </Grid>
-    </StackPanel>
+    <!--</StackPanel>-->
 </Page>

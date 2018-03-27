@@ -76,8 +76,8 @@ namespace WeatherForecast
             }
             else
             {
-                this.cityName = cityName + " not found !";
-            }
+                this.cityName = "City not found Try Again\n  Or Search By Location";
+            }                      
 
             cityBox.Text = cityName;
             int index = 0;
