@@ -25,7 +25,7 @@ namespace WeatherForecast
     /// </summary>
     public sealed partial class MainPage : Page
     {
-         
+
 
         public String userCity { get; set; }
         public String locationForecast { get; set; }
@@ -43,11 +43,11 @@ namespace WeatherForecast
         private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            String userText =  cityInput.Text;
+            String userText = cityInput.Text;
             Debug.WriteLine("DEBUG : User input =" + userText);
 
-            
-            if (userText.Length<3)
+
+            if (userText.Length < 3)
             {
                 errorBox.Visibility = Visibility;
             }
@@ -58,7 +58,7 @@ namespace WeatherForecast
 
 
                 //save the search and date in local storage
-                localSettings.Values["prevSearch"] = userText+ " on "+ DateTime.Now.ToString("M/d/yyyy"); 
+                localSettings.Values["prevSearch"] = userText + " on " + DateTime.Now.ToString("M/d/yyyy");
                 Frame.Navigate(typeof(WeatherPage), citySearch);
             }
 
@@ -68,27 +68,27 @@ namespace WeatherForecast
         {
             var geoLocator = new Geolocator();
             geoLocator.DesiredAccuracy = PositionAccuracy.High;
-           var pos = await geoLocator.GetGeopositionAsync();
-            string latitude =  pos.Coordinate.Point.Position.Latitude.ToString();
+            var pos = await geoLocator.GetGeopositionAsync();
+            string latitude = pos.Coordinate.Point.Position.Latitude.ToString();
             string longitude = pos.Coordinate.Point.Position.Longitude.ToString();
-            Debug.WriteLine("DEBUG :locator: " +latitude+"\n"+longitude);
+            Debug.WriteLine("DEBUG :locator: " + latitude + "\n" + longitude);
             userLocation.Visibility = Visibility;
             var userLocationStr = latitude + "\n" + longitude;
-            userLocation.Text =userLocationStr;
+            userLocation.Text = userLocationStr;
 
             // Display button for current location forecast
             this.locationForecast = "lat=" + latitude + "&lon=" + longitude;
             getLocForecast.Visibility = Visibility;
         }
 
-        
+
 
         private void getLocForecast_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
             //save the search and date in local storage
-            localSettings.Values["prevSearch"] = locationForecast + " on " + DateTime.Now.ToString("M/d/yyyy"); 
+            localSettings.Values["prevSearch"] = locationForecast + " on " + DateTime.Now.ToString("M/d/yyyy");
             Frame.Navigate(typeof(WeatherPage), locationForecast);
         }
 
@@ -98,21 +98,59 @@ namespace WeatherForecast
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
             // if local storage value is available show the prevSearch textbox with date and last search
+            // also must set the tempeture setting
             try
             {
                 var VisibilityPropertyA = Visibility.Visible;
                 prevSearch.Text = "Your last forecast was for " + (string)localSettings.Values["prevSearch"];
                 prevSearch.Visibility = VisibilityPropertyA;
+
+                
+                var chosen = (string)localSettings.Values["tempSetting"];
+                // set default selected based on local storage
+                if (chosen == "Kelvin")
+                {
+                    tempType.SelectedIndex = 1;
+                }
+                else
+                {
+                    tempType.SelectedIndex = 0;
+                }
+               
+
             }
             catch
             {
-                // if no local storage value is available do not show the prevSearch textbox 
+                // if no local storage value is available do not show the prevSearch textbox and set defaults
                 prevSearch.Text = "No recent searches";
                 var VisibilityPropertyA = Visibility.Collapsed;
                 prevSearch.Visibility = VisibilityPropertyA;
+                tempType.SelectedIndex = 0;
             }
+            
             base.OnNavigatedTo(e);
         }
 
+        /*
+         drop down box to choose tempeture format, Chosen tempeture will be saved to local storage
+          */
+        private void tempType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            var comboBoxItem = e.AddedItems[0] as ComboBoxItem;
+            if (comboBoxItem == null) return;
+            var content = comboBoxItem.Content as string;
+            if (content != null && content.Equals("Celsius"))
+            {
+                //save the choice in local storage
+                localSettings.Values["tempSetting"] = content;
+                Debug.WriteLine("DEBUG Degrees selected: ");
+            }
+            if (content != null && content.Equals("Kelvin"))
+            {
+                localSettings.Values["tempSetting"] = content;
+                Debug.WriteLine("DEBUG kelvin selected ");
+            }
+        }
     }
 }

@@ -12,6 +12,10 @@
         <Grid Background="LightBlue">
             <StackPanel>
                 <TextBlock x:Name="titleBar"  Text="Weather Forecast" Foreground="MidnightBlue"  Margin="5,0,5,0" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="tempType" Header="Temperature format" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
+                    <ComboBoxItem x:Name="cel" Content="Celsius"/>
+                    <ComboBoxItem x:Name="kel" Content="Kelvin" />
+                </ComboBox>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <TextBox x:Name="cityInput" Width="500" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
                     <Button x:Name="cityButton" Margin="0,5,0,0" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
