@@ -42,7 +42,8 @@ namespace WeatherForecast
 
             String userText = cityInput.Text;
             Debug.WriteLine("DEBUG : User input =" + userText);
-
+            // Play a sound effect
+            App.MyAppSounds.Play(SoundEfxEnum.CLICK);
 
             if (userText.Length < 3)
             {
@@ -135,6 +136,8 @@ namespace WeatherForecast
           */
         private void tempType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Play a sound effect
+            App.MyAppSounds.Play(SoundEfxEnum.CLICK);
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var comboBoxItem = e.AddedItems[0] as ComboBoxItem;
             if (comboBoxItem == null) return;

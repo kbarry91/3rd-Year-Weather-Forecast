@@ -62,7 +62,7 @@
         <TextBlock x:Name="cityBox" HorizontalAlignment="Center" FontSize="50" TextWrapping="Wrap"  ></TextBlock>
         <Button
             x:Name="ReturnToMain" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" BorderThickness="1,1,1,1" FontSize="48" Background="#33B40C0C" BorderBrush="#FFF50B0B" FontFamily="Bauhaus 93" FontWeight="Bold" AutomationProperties.HelpText="Click to return to main" Click="ReturnToMain_Click" >Return To Main</Button>
-        <Pivot x:Name="pvtWeather"  HorizontalContentAlignment="Center" Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"     >
+        <Pivot x:Name="pvtWeather"  HorizontalContentAlignment="Center" Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="pvtWeather_SelectionChanged" >
 
         </Pivot>
       

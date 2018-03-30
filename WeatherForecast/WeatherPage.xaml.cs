@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Devices.Geolocation;
+using Windows.Storage.Streams;
 
 namespace WeatherForecast
 {
@@ -53,7 +54,11 @@ namespace WeatherForecast
             
           
         }
-
+        /// <summary>
+        /// BuildweatherAsync is a sync method that populates all the pivot items with the required data
+        /// </summary>
+        /// <param name="cityCode"></param>
+        /// <returns>Task</returns>
         public async Task BuildweatherAsync(String cityCode)
         {
             
@@ -66,9 +71,14 @@ namespace WeatherForecast
             else
             {
                 this.cityName = "City not found Try Again\n  Or Search By Location";
-            }                      
-            
+            }
             cityBox.Text = cityName;
+            if (this.cityName == "City not found Try Again\n Or Search By Location") ;
+            {
+                // Play a sound effect
+            App.MyAppSounds.Play(SoundEfxEnum.WRONG);
+            }
+            
             int index = 0;
             foreach (var day in myForecast.SortedDays)
             { 
@@ -95,25 +105,52 @@ namespace WeatherForecast
             {
                 Header = "Map"
             };
+
+            // A list to hold points of interest
+            var poi = new List<MapElement>();
             
-            // Specify a known location.
+            // Retrieves the co-ordinates of the current forecast
             BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = myForecast.SortedDays[0][0].coLat, Longitude = myForecast.SortedDays[0][0].coLong };
             Geopoint cityCenter = new Geopoint(cityPosition);
-             
-            
-            mapPivot.Content = "This is a map";
-            MapControl MapControl2 = new MapControl();
-            // Set the map location.
-            MapControl2.Center = cityCenter;
-            MapControl2.ZoomLevel = 12;
-            MapControl2.LandmarksVisible = true;
 
-            MapControl2.ZoomInteractionMode = MapInteractionMode.GestureAndControl;
-            MapControl2.TiltInteractionMode = MapInteractionMode.GestureAndControl;
-            MapControl2.MapServiceToken = "As7Ns8nGzuBs50x2zsXt1nXd7kIxbsQkTdVMpv9z8VaRBfMgki0iCCKJnqRLfrjq";
+            //creates an icon for the map and adds the relevent weather icon
+            var locationIcon = new MapIcon
+            {
+                Location = cityCenter,
+                NormalizedAnchorPoint = new Point(0.5, 1.0),
+                ZIndex = 0,
+                Title = "Today its looking like "+ myForecast.SortedDays[0][0].desc,
+                Image = RandomAccessStreamReference.CreateFromUri(new Uri(myForecast.SortedDays[0][0].icon))
+            };
 
-            mapPivot.Content = (MapControl2);
-           // pageGrid.Children.Add(MapControl2);
+            // add the icon to the map
+            poi.Add(locationIcon);
+            var LandmarksLayer = new MapElementsLayer
+            {
+                ZIndex = 1,
+                MapElements = poi
+            };
+
+            // create a new MapControl
+            MapControl weatherMap = new MapControl
+            {
+                // Set the map location.
+                Center = cityCenter,
+                ZoomLevel = 12,
+                LandmarksVisible = true,
+
+                ZoomInteractionMode = MapInteractionMode.GestureAndControl,
+                TiltInteractionMode = MapInteractionMode.GestureAndControl,
+                MapServiceToken = "As7Ns8nGzuBs50x2zsXt1nXd7kIxbsQkTdVMpv9z8VaRBfMgki0iCCKJnqRLfrjq"
+            };
+            weatherMap.Layers.Add(LandmarksLayer);
+
+            // center the map around the current location
+            weatherMap.Center = cityCenter;
+            weatherMap.ZoomLevel = 14;
+            mapPivot.Content = (weatherMap);
+
+            //add the map to the pivot
             pvtWeather.Items.Add(mapPivot);
             
         }
@@ -121,9 +158,17 @@ namespace WeatherForecast
         // button to return to main menu
         private void ReturnToMain_Click(object sender, RoutedEventArgs e)
         {
+            App.MyAppSounds.Play(SoundEfxEnum.NOTGOOD);
             Frame.Navigate(typeof(MainPage));
         }
 
+        
+
+        private void pvtWeather_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Play a sound effect
+            App.MyAppSounds.Play(SoundEfxEnum.SWIPE);
+        }
     }
 
 

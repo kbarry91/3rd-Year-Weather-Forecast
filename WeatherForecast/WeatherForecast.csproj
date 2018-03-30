@@ -100,6 +100,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundFx.cs" />
     <Compile Include="Weather.cs" />
     <Compile Include="WeatherController.cs" />
     <Compile Include="WeatherPage.xaml.cs">
@@ -113,6 +114,12 @@
     <None Include="WeatherForecast_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\click.mp3" />
+    <Content Include="Assets\good.mp3" />
+    <Content Include="Assets\notgood.mp3" />
+    <Content Include="Assets\Sounds\click.mp3" />
+    <Content Include="Assets\swipe.mp3" />
+    <Content Include="Assets\wrong.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -148,6 +155,7 @@
       <Version>11.0.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
