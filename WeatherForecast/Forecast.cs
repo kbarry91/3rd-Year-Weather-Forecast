@@ -22,17 +22,17 @@ namespace WeatherForecast
 
         }
 
-
         /*
          GetWeather initilizes a Result onject with all of the selected counties data
          */
-        // public List<List<WeatherController>> SortWeather()
         public async Task GetWeather(string cCode)
         {
             // load local storage
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
             // tempSetting represents the forma to convert kelvin to celsius
             double tempSetting= 273.15;
+
             // must confirm with local storage users selected temperature format
             try
             {
@@ -55,17 +55,15 @@ namespace WeatherForecast
                 // if no local storage value is available do not show the prevSearch textbox 
                 tempSetting = 1;
             }
-            // DEBUG
-            Debug.WriteLine("DEBUG: Started getWeather");
+           
             string cityCode = cCode;
             string apiKey = "&APPID=833dac87e9be3b3f86533d84b6064a84";
-            // string cityCode = "id=2964179";
+           
             string url = "http://api.openweathermap.org/data/2.5/forecast?" + cityCode + apiKey;
 
             // adapted from https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
             var uri = new Uri(url);
-            //using (HttpClient client = new HttpClient())
-            //{
+            
             using (HttpResponseMessage response = await Client.GetAsync(uri))
             {
                 using (IHttpContent content = response.Content)
@@ -79,9 +77,7 @@ namespace WeatherForecast
                         // adapted from https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
 
                         Result = JsonConvert.DeserializeObject<RootObject>(json);
-                        //  SortWeather();
-
-
+                        
                         SortedDays = new List<List<WeatherController>>();
 
                         //create a list of weatherController objects to hold each hourly interval
@@ -105,47 +101,37 @@ namespace WeatherForecast
                                 dtime = Result.list[counter].dt_txt,
                                 dayOfWeek = (Convert.ToDateTime(Result.list[counter].dt_txt).DayOfWeek).ToString(),
                                 temp = (Math.Truncate(Result.list[counter].main.temp - tempSetting) * 100) / 100,
-                                //  temp = Result.list[counter].main.temp,
                                 humidity = Result.list[counter].main.humidity,
                                 desc = Result.list[counter].weather[0].description,
                                 windSpeed = Result.list[counter].wind.speed,
                                 icon = "http://openweathermap.org/img/w/" + Result.list[counter].weather[0].icon + ".png",
-                                city = Result.city.name
-                            };
+                                city = Result.city.name,
+
+
+                            coLong =Result.city.coord.lon,
+                            coLat = Result.city.coord.lat
+                        };
+                           //Debug.WriteLine("DEBUG : lat =" + Result.coord.lat);
                             sortedHours.Add(wController);
 
                             prevDate = Convert.ToDateTime(Result.list[counter].dt_txt);
                             counter++;
 
                         }
+
                         // add any left over sortedHours to SortedDays
                         if (sortedHours != null)
                         {
                             SortedDays.Add(sortedHours);
                         }
 
-
-                        // test List of list Structure
-                        int xCount = 0, yCount = 0;
-                        foreach (var sd in SortedDays)
-                        {
-                            foreach (var sh in sd)
-                            {
-                                // DEBUG
-                                Debug.WriteLine("DEBUG: " + SortedDays[xCount][yCount].ToString());
-                                yCount++;
-                            }
-                            Debug.WriteLine(" -");
-                            xCount++;
-                            yCount = 0;
-                        }
                     }
                     else
                     {
                         this.httpSuccess = false;
                         Debug.WriteLine("DEBUG: response error"+response.ReasonPhrase);
                     }
-                    Debug.WriteLine("DEBUG: Finished getWeather");
+                    
                     
                 }
             }//using (HttpResponseMessage response = await Client.GetAsync(uri))

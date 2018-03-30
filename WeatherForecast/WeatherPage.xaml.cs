@@ -17,14 +17,13 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.Storage;
+using Windows.UI.Xaml.Controls.Maps;
+using Windows.Devices.Geolocation;
 
 namespace WeatherForecast
 {
 
-    //public ObservableCollection<Daylist> daylists { get; set; }
 
     public sealed partial class WeatherPage : Page
     {
@@ -36,20 +35,14 @@ namespace WeatherForecast
 
         public WeatherPage()
         {
-            String cityCode;
-            Debug.WriteLine("DEBUG : WeatherPage");
             this.InitializeComponent();
-
-            //myForecast = new Forecast();
-            // BuildweatherAsync(cityCode);
-
-            //myForecast.GetWeather("id=2964179");//.GetAwaiter().GetResult();
-            Debug.WriteLine("DEBUG IN WEATHERPAGE MAIN METHOD: ");
+            
         }
 
         // Recieve city name variable from mainPage
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
 
             base.OnNavigatedTo(e);
            this.cityCode =  e.Parameter.ToString();
@@ -57,18 +50,14 @@ namespace WeatherForecast
             this.cityName = e.Parameter.ToString();
             myForecast = new Forecast();
            var buildWeather = BuildweatherAsync(cityCode);
+            
+          
         }
 
         public async Task BuildweatherAsync(String cityCode)
         {
-            //DEBUG 
-            Debug.WriteLine("DEBUG : BuildWeatherAsync" + " citycode:" + cityCode);
-
-            await myForecast.GetWeather(cityCode);//.GetAwaiter().GetResult();
-                                                  // 2965767
-                                                  //wait myForecast.GetWeather("id=2147714");//.GetAwaiter().GetResult();
-
-
+            
+            await myForecast.GetWeather(cityCode);
 
             if (myForecast.httpSuccess)
             {
@@ -78,11 +67,11 @@ namespace WeatherForecast
             {
                 this.cityName = "City not found Try Again\n  Or Search By Location";
             }                      
-
+            
             cityBox.Text = cityName;
             int index = 0;
             foreach (var day in myForecast.SortedDays)
-            {
+            { 
                 var weathers = new ObservableCollection<WeatherController>();
                 foreach (var weatherItem in day)
                 {
@@ -101,10 +90,32 @@ namespace WeatherForecast
                 listView.ItemTemplate = ListViewDataTemplate;
                 pvtWeather.Items.Add(pivotItem);
 
-
             }
+            var mapPivot = new PivotItem
+            {
+                Header = "Map"
+            };
+            
+            // Specify a known location.
+            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = myForecast.SortedDays[0][0].coLat, Longitude = myForecast.SortedDays[0][0].coLong };
+            Geopoint cityCenter = new Geopoint(cityPosition);
+             
+            
+            mapPivot.Content = "This is a map";
+            MapControl MapControl2 = new MapControl();
+            // Set the map location.
+            MapControl2.Center = cityCenter;
+            MapControl2.ZoomLevel = 12;
+            MapControl2.LandmarksVisible = true;
 
+            MapControl2.ZoomInteractionMode = MapInteractionMode.GestureAndControl;
+            MapControl2.TiltInteractionMode = MapInteractionMode.GestureAndControl;
+            MapControl2.MapServiceToken = "As7Ns8nGzuBs50x2zsXt1nXd7kIxbsQkTdVMpv9z8VaRBfMgki0iCCKJnqRLfrjq";
 
+            mapPivot.Content = (MapControl2);
+           // pageGrid.Children.Add(MapControl2);
+            pvtWeather.Items.Add(mapPivot);
+            
         }
 
         // button to return to main menu

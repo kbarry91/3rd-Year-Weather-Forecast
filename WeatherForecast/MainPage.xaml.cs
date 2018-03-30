@@ -35,9 +35,6 @@ namespace WeatherForecast
             this.InitializeComponent();
             DataContext = this;
 
-
-            //DEBUG
-            Debug.WriteLine("DEBUG : end of mainpage reached");
         }
 
         private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -69,10 +66,12 @@ namespace WeatherForecast
             var geoLocator = new Geolocator();
             geoLocator.DesiredAccuracy = PositionAccuracy.High;
             var pos = await geoLocator.GetGeopositionAsync();
+
             string latitude = pos.Coordinate.Point.Position.Latitude.ToString();
             string longitude = pos.Coordinate.Point.Position.Longitude.ToString();
-            Debug.WriteLine("DEBUG :locator: " + latitude + "\n" + longitude);
+
             userLocation.Visibility = Visibility;
+
             var userLocationStr = latitude + "\n" + longitude;
             userLocation.Text = userLocationStr;
 

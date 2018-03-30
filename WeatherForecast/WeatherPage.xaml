@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
     <Page.Resources>
         <DataTemplate x:Name="ListViewDataTemplate"  >
 
@@ -15,7 +16,8 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
+                <Grid>
+                </Grid>
                 <Grid BorderBrush="Black" BorderThickness="2" Margin="2" HorizontalAlignment="Center" Background="DeepSkyBlue" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -27,7 +29,7 @@
                       
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Time : " FontWeight="Bold"></TextBlock>
-                            <TextBlock Text="{Binding dtime}"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding dtime}" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                       
                         <StackPanel Orientation="Horizontal"  >

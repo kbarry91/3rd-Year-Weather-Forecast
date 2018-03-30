@@ -16,7 +16,8 @@ namespace WeatherForecast
         public double windSpeed { get; set; }
         public String icon { get; set; }
         public String city { get; set; }
-
+        public double coLong { get; set; }
+        public double coLat { get; set; }
         public WeatherController()
         {
 
