@@ -42,7 +42,7 @@ namespace WeatherForecast
          * CityButton is the main search button .
          * Search must be saved and added to local storage.
          */
-        private void CityButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
             String userText = cityInput.Text;
@@ -67,7 +67,7 @@ namespace WeatherForecast
 
         }
 
-        private async void GetLocation_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void getLocation_Tapped(object sender, TappedRoutedEventArgs e)
         {
             // Request permission from user for location.
             var accessStatus = await Geolocator.RequestAccessAsync();
@@ -140,7 +140,7 @@ namespace WeatherForecast
             ToastNotifier.Show(toast);
         }
 
-        private void GetLocForecast_Click(object sender, RoutedEventArgs e)
+        private void getLocForecast_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
@@ -189,7 +189,7 @@ namespace WeatherForecast
         /*
          * Drop down box to choose tempeture format, Chosen tempeture will be saved to local storage.
         */
-        private void TempType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void tempType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Play a sound effect.
             App.MyAppSounds.Play(SoundEfxEnum.CLICK);

@@ -12,21 +12,21 @@
             
             <StackPanel>
                 <TextBlock x:Name="titleBar"  Text="My Forecast" Foreground="MidnightBlue"  Margin="0,20,0,1" FontSize="40" HorizontalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="tempType" Header="Temperature format" Width="200" HorizontalAlignment="Center"  SelectionChanged="TempType_SelectionChanged">
+                <ComboBox x:Name="tempType" Header="Temperature format" Width="200" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
                     <ComboBoxItem x:Name="cel" Content="Celsius"/>
                     <ComboBoxItem x:Name="kel" Content="Kelvin" />
                 </ComboBox>
                 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <TextBox x:Name="cityInput" Width="200" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
-                    <Button x:Name="cityButton" Margin="0,5,0,0" Width="200" Tapped="CityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
+                    <Button x:Name="cityButton" Margin="0,5,0,0" Width="200" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
                     <TextBlock x:Name="errorBox" Visibility="Collapsed" Text="Please enter a city name" Foreground="Red" ></TextBlock>
                 </StackPanel>
                 
                 <StackPanel>
-                    <Button x:Name="getLocation" Width="200" Height="35" Tapped="GetLocation_Tapped" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">Get Your Current Location</Button>
+                    <Button x:Name="getLocation" Width="200" Height="35" Tapped="getLocation_Tapped" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">Get Your Current Location</Button>
                     <TextBlock x:Name="userLocation" Visibility="Collapsed"  Foreground="Blue" HorizontalAlignment="Center" ></TextBlock>
-                    <Button x:Name="getLocForecast" Width="200" Height="50" Visibility="Collapsed" Click="GetLocForecast_Click" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">
+                    <Button x:Name="getLocForecast" Width="200" Height="50" Visibility="Collapsed" Click="getLocForecast_Click" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">
                         <TextBlock Text="Get the Forecast for your current location"  TextWrapping="Wrap" TextAlignment="Center"/>
                     </Button>
                 </StackPanel>

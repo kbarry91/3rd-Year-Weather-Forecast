@@ -107,7 +107,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" x:Name="cityBox" HorizontalAlignment="Center" FontSize="50" TextWrapping="Wrap"  ></TextBlock>
 
-            <Pivot x:Name="pvtWeather" Grid.Row="1"   Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="PvtWeather_SelectionChanged" >
+            <Pivot x:Name="pvtWeather" Grid.Row="1"   Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="pvtWeather_SelectionChanged" >
 
             </Pivot>
         </Grid>

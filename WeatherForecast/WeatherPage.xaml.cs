@@ -154,7 +154,7 @@ namespace WeatherForecast
             Frame.Navigate(typeof(MainPage));
         }
 
-        private void PvtWeather_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void pvtWeather_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
