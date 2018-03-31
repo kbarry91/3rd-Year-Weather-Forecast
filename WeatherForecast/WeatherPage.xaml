@@ -10,31 +10,58 @@
     <Page.Resources>
         <DataTemplate x:Name="ListViewDataTemplate"  >
 
-            <Grid>
+            <Grid   Margin="10,0,10,0" x:Name="MainGrid">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="WideState">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="720" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="MainGrid.Margin" Value="24"/>
+                                <Setter Target="MainGrid.RowDefinitions[1].Height" Value="auto"/>
+                                <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="*"/>
+                                <Setter Target="FirstGrid.Margin" Value="0 0 6 0"/>
+                                <Setter Target="SecondGrid.Margin" Value="6 0 0 0"/>
+                                <Setter Target="SecondGrid.(Grid.Column)" Value="1"/>
+                                <Setter Target="SecondGrid.(Grid.Row)" Value="0"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="NarrowState">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="MainGrid.Margin" Value="12"/>
+                                <Setter Target="FirstGrid.Margin" Value="0 0 0 6"/>
+                                <Setter Target="SecondGrid.Margin" Value="0 6 0 0"/>
+                                <Setter Target="MainGrid.RowDefinitions[1].Height" Value="*"/>
+                                <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="auto"/>
+                                <Setter Target="SecondGrid.(Grid.Column)" Value="0"/>
+                                <Setter Target="SecondGrid.(Grid.Row)" Value="1"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid>
-                </Grid>
-                <Grid BorderBrush="Black" BorderThickness="2" Margin="2" HorizontalAlignment="Center" Background="DeepSkyBlue" Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="{Binding icon}" Stretch="Fill" Height="100" Width="150" Margin="20" Grid.Column="1"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0"  >
+                    <StackPanel VerticalAlignment="Center"    >
 
-                    <StackPanel VerticalAlignment="Center">
-                      
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Time : " FontWeight="Bold"></TextBlock>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding dtime}" FontWeight="Bold"></TextBlock>
+                            
+                            <TextBlock  Text="{Binding dtime}" FontWeight="Bold"></TextBlock>
                         </StackPanel>
-                      
+
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock HorizontalAlignment="Stretch" FontWeight="Bold" Text="Temperature: " ></TextBlock>
-                            <TextBlock  HorizontalAlignment="Stretch" Text="{Binding temp}"></TextBlock>
+                            <TextBlock   Text="{Binding temp}"></TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -53,18 +80,30 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
+                
+                <Grid x:Name="SecondGrid" Grid.Column="1" Grid.Row="0"  >
+                    <Image Source="{Binding icon}" Stretch="fill" Height="100" Width="150" Margin="20" />
+                </Grid>
+
             </Grid>
 
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="LightBlue">
-        <TextBlock x:Name="cityBox" HorizontalAlignment="Center" FontSize="50" TextWrapping="Wrap"  ></TextBlock>
+    <Grid Background="LightBlue" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" x:Name="cityBox" HorizontalAlignment="Center" FontSize="50" TextWrapping="Wrap"  ></TextBlock>
+
+            <Pivot x:Name="pvtWeather" Grid.Row="1"   Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="pvtWeather_SelectionChanged" >
+
+            </Pivot>
+        </Grid>
         <Button
             x:Name="ReturnToMain" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" BorderThickness="1,1,1,1" FontSize="48" Background="#33B40C0C" BorderBrush="#FFF50B0B" FontFamily="Bauhaus 93" FontWeight="Bold" AutomationProperties.HelpText="Click to return to main" Click="ReturnToMain_Click" >Return To Main</Button>
-        <Pivot x:Name="pvtWeather"  HorizontalContentAlignment="Center" Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="pvtWeather_SelectionChanged" >
-
-        </Pivot>
-      
     </Grid>
+    
 </Page>

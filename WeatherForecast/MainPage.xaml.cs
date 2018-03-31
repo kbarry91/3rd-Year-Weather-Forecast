@@ -16,6 +16,7 @@ using System.Net;
 using System.Diagnostics;
 using Windows.Devices.Geolocation;
 using Windows.Storage;
+using Windows.UI.Notifications;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace WeatherForecast
@@ -29,6 +30,9 @@ namespace WeatherForecast
 
         public String userCity { get; set; }
         public String locationForecast { get; set; }
+
+     
+
         public MainPage()
         {
             //request permission for location
@@ -64,6 +68,43 @@ namespace WeatherForecast
 
         private async void getLocation_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            var accessStatus = await Geolocator.RequestAccessAsync();
+
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+                   ShowToastNotification("Loading","Waiting for update");
+
+                    var geoLocator = new Geolocator();
+                    geoLocator.DesiredAccuracy = PositionAccuracy.High;
+                    var pos = await geoLocator.GetGeopositionAsync();
+
+                    string latitude = pos.Coordinate.Point.Position.Latitude.ToString();
+                    string longitude = pos.Coordinate.Point.Position.Longitude.ToString();
+
+                    userLocation.Visibility = Visibility;
+
+                    var userLocationStr = latitude + "\n" + longitude;
+                    userLocation.Text = userLocationStr;
+
+                    // Display button for current location forecast
+                    this.locationForecast = "lat=" + latitude + "&lon=" + longitude;
+                    getLocForecast.Visibility = Visibility;
+                    ShowToastNotification("Success", "Location updated");
+                    break;
+
+                case GeolocationAccessStatus.Denied:
+                    ShowToastNotification("Denied", "Access to location is denied.");
+                    
+                    
+                    break;
+
+                case GeolocationAccessStatus.Unspecified:
+                    ShowToastNotification("Error", "Unspecified error.");
+                   
+                    break;
+            }
+            /*
             var geoLocator = new Geolocator();
             geoLocator.DesiredAccuracy = PositionAccuracy.High;
             var pos = await geoLocator.GetGeopositionAsync();
@@ -79,10 +120,25 @@ namespace WeatherForecast
             // Display button for current location forecast
             this.locationForecast = "lat=" + latitude + "&lon=" + longitude;
             getLocForecast.Visibility = Visibility;
+            */
         }
+        
+        private void ShowToastNotification(string title, string stringContent)
+        {
+            ToastNotifier ToastNotifier = ToastNotificationManager.CreateToastNotifier();
+            Windows.Data.Xml.Dom.XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            Windows.Data.Xml.Dom.XmlNodeList toastNodeList = toastXml.GetElementsByTagName("text");
+            toastNodeList.Item(0).AppendChild(toastXml.CreateTextNode(title));
+            toastNodeList.Item(1).AppendChild(toastXml.CreateTextNode(stringContent));
+            Windows.Data.Xml.Dom.IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
+            audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
 
-
-
+            ToastNotification toast = new ToastNotification(toastXml);
+            toast.ExpirationTime = DateTime.Now.AddSeconds(4);
+            ToastNotifier.Show(toast);
+        }
+        
         private void getLocForecast_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;

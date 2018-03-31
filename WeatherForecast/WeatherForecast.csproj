@@ -115,8 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\click.mp3" />
-    <Content Include="Assets\good.mp3" />
-    <Content Include="Assets\notgood.mp3" />
     <Content Include="Assets\Sounds\click.mp3" />
     <Content Include="Assets\swipe.mp3" />
     <Content Include="Assets\wrong.mp3" />

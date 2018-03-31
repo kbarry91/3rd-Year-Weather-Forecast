@@ -73,11 +73,7 @@ namespace WeatherForecast
                 this.cityName = "City not found Try Again\n  Or Search By Location";
             }
             cityBox.Text = cityName;
-            if (this.cityName == "City not found Try Again\n Or Search By Location") ;
-            {
-                // Play a sound effect
-            App.MyAppSounds.Play(SoundEfxEnum.WRONG);
-            }
+           
             
             int index = 0;
             foreach (var day in myForecast.SortedDays)
@@ -141,7 +137,7 @@ namespace WeatherForecast
 
                 ZoomInteractionMode = MapInteractionMode.GestureAndControl,
                 TiltInteractionMode = MapInteractionMode.GestureAndControl,
-                MapServiceToken = "As7Ns8nGzuBs50x2zsXt1nXd7kIxbsQkTdVMpv9z8VaRBfMgki0iCCKJnqRLfrjq"
+                MapServiceToken = "iBE655yg4eGRRNKYjHUl~hnr8sRu5EvNBdY1r3_Sy3w~Ah7Zm5ZBjNR3W2DR4Canq2MolMsRbZiQB3UkoCeHdUo_l81X0c251rOzCH6TE-6Y"
             };
             weatherMap.Layers.Add(LandmarksLayer);
 
@@ -152,13 +148,13 @@ namespace WeatherForecast
 
             //add the map to the pivot
             pvtWeather.Items.Add(mapPivot);
+            pvtWeather.HorizontalAlignment = HorizontalAlignment.Center;
             
         }
 
         // button to return to main menu
         private void ReturnToMain_Click(object sender, RoutedEventArgs e)
         {
-            App.MyAppSounds.Play(SoundEfxEnum.NOTGOOD);
             Frame.Navigate(typeof(MainPage));
         }
 

@@ -31,6 +31,8 @@ namespace WeatherForecast
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            // add global sounds
+            ElementSoundPlayer.State = ElementSoundPlayerState.On;
         }
 
         /// <summary>

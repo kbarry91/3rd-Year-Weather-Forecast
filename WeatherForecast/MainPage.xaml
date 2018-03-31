@@ -12,13 +12,13 @@
         <Grid Background="LightBlue" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <StackPanel>
                 <TextBlock x:Name="titleBar"  Text="My Forecast" Foreground="MidnightBlue"  Margin="0,20,0,1" FontSize="40" HorizontalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="tempType" Header="Temperature format" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
+                <ComboBox x:Name="tempType" Header="Temperature format" Width="200" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
                     <ComboBoxItem x:Name="cel" Content="Celsius"/>
                     <ComboBoxItem x:Name="kel" Content="Kelvin" />
                 </ComboBox>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBox x:Name="cityInput" Width="500" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
-                    <Button x:Name="cityButton" Margin="0,5,0,0" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
+                    <TextBox x:Name="cityInput" Width="200" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
+                    <Button x:Name="cityButton" Margin="0,5,0,0" Width="200" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
                     <TextBlock x:Name="errorBox" Visibility="Collapsed" Text="Please enter a city name" Foreground="Red" ></TextBlock>
                 </StackPanel>
                 
@@ -64,10 +64,16 @@
                             <TextBlock Text="Chosen Temperature setting is saved for next use" FontSize="12"/>
                             <TextBlock Text="Your most recent Forecast is saved" FontSize="12"/>
                         </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Map"  FontWeight="Bold" FontSize="12"/>
+                            <TextBlock Text="A map is available to show the weather in your location" FontSize="12"/>
+                       
+                        </StackPanel>
                     </StackPanel>
                 </Flyout>
                 </Button.Flyout>
             </Button>
+            
         </Grid>
     <!--</StackPanel>-->
 </Page>

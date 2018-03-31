@@ -12,8 +12,8 @@ namespace WeatherForecast
     {
         CLICK,
         SWIPE,
-        WRONG,
-        NOTGOOD,
+        WRONG
+        
     }
     public class SoundFx
     {
@@ -31,7 +31,6 @@ namespace WeatherForecast
             effects.Add(SoundEfxEnum.CLICK, await LoadSoundFile("click.mp3"));
             effects.Add(SoundEfxEnum.SWIPE, await LoadSoundFile("swipe.mp3"));
             effects.Add(SoundEfxEnum.WRONG, await LoadSoundFile("wrong.mp3"));
-             effects.Add(SoundEfxEnum.NOTGOOD, await LoadSoundFile("notgood.mp3"));
         }
 
         private async Task<MediaElement> LoadSoundFile(string v)

@@ -19,13 +19,7 @@ namespace WeatherForecast
         public int humidity { get; set; }
         public double temp_kf { get; set; }
 
-        public override string ToString()
-        {
-            // converts tempeture from kelvin to degrees and truncates to 2 deciaml places
-            var celsius = Math.Truncate((temp - 273.15) * 100) / 100;
-            var str = " celsius" + celsius + " humidity" + humidity;
-            return str;
-        }
+       
     }
 
     public class Weather
