@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="9617ed19-d278-462a-b3a7-f402a29982ac" Publisher="CN=Intel Build" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="9617ed19-d278-462a-b3a7-f402a29982ac" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="22569Kevin-Barry.MyWeatherForecast" Publisher="CN=29E1431A-AE6A-4B94-BA25-93350433FBF6" Version="1.1.2.0" />
+  <mp:PhoneIdentity PhoneProductId="193cc1d4-9e4f-45ca-b789-85318b1afe73" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>WeatherForecast</DisplayName>
-    <PublisherDisplayName>Intel Build</PublisherDisplayName>
+    <DisplayName>My Weather Forecast</DisplayName>
+    <PublisherDisplayName>Kevin-Barry</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WeatherForecast.App">
-      <uap:VisualElements DisplayName="WeatherForecast" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="WeatherForecast" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="My Weather Forecast" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="WeatherForecast" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
