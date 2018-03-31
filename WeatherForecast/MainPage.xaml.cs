@@ -21,34 +21,35 @@ using Windows.UI.Notifications;
 
 namespace WeatherForecast
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    /*
+     Mainpage is the base page loaded when app is run
+     */
     public sealed partial class MainPage : Page
     {
-
 
         public String userCity { get; set; }
         public String locationForecast { get; set; }
 
-     
-
         public MainPage()
         {
-            //request permission for location
             this.InitializeComponent();
             DataContext = this;
 
         }
 
-        private void cityButton_Tapped(object sender, TappedRoutedEventArgs e)
+        /*
+         * cityButton is the main search button 
+         * Search ,ust be saved and added to local storage
+         */
+        private void CityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
             String userText = cityInput.Text;
-            Debug.WriteLine("DEBUG : User input =" + userText);
+
             // Play a sound effect
             App.MyAppSounds.Play(SoundEfxEnum.CLICK);
 
+            // error checking in invalid city entered
             if (userText.Length < 3)
             {
                 errorBox.Visibility = Visibility;
@@ -66,17 +67,21 @@ namespace WeatherForecast
 
         }
 
-        private async void getLocation_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void GetLocation_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            // request permission from user for location
             var accessStatus = await Geolocator.RequestAccessAsync();
 
             switch (accessStatus)
             {
+                // if granted recieve location and display a button to check forecast
                 case GeolocationAccessStatus.Allowed:
-                   ShowToastNotification("Loading","Waiting for update");
+                    ShowToastNotification("Loading", "Waiting for update");
 
-                    var geoLocator = new Geolocator();
-                    geoLocator.DesiredAccuracy = PositionAccuracy.High;
+                    var geoLocator = new Geolocator
+                    {
+                        DesiredAccuracy = PositionAccuracy.High
+                    };
                     var pos = await geoLocator.GetGeopositionAsync();
 
                     string latitude = pos.Coordinate.Point.Position.Latitude.ToString();
@@ -95,51 +100,46 @@ namespace WeatherForecast
 
                 case GeolocationAccessStatus.Denied:
                     ShowToastNotification("Denied", "Access to location is denied.");
-                    
-                    
                     break;
 
                 case GeolocationAccessStatus.Unspecified:
                     ShowToastNotification("Error", "Unspecified error.");
-                   
                     break;
             }
-            /*
-            var geoLocator = new Geolocator();
-            geoLocator.DesiredAccuracy = PositionAccuracy.High;
-            var pos = await geoLocator.GetGeopositionAsync();
 
-            string latitude = pos.Coordinate.Point.Position.Latitude.ToString();
-            string longitude = pos.Coordinate.Point.Position.Longitude.ToString();
-
-            userLocation.Visibility = Visibility;
-
-            var userLocationStr = latitude + "\n" + longitude;
-            userLocation.Text = userLocationStr;
-
-            // Display button for current location forecast
-            this.locationForecast = "lat=" + latitude + "&lon=" + longitude;
-            getLocForecast.Visibility = Visibility;
-            */
         }
-        
+
+        /*
+         * toast notifications to show various success , progress or failures
+         */
         private void ShowToastNotification(string title, string stringContent)
         {
+            // Initialize a ToastNotifier
             ToastNotifier ToastNotifier = ToastNotificationManager.CreateToastNotifier();
             Windows.Data.Xml.Dom.XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
             Windows.Data.Xml.Dom.XmlNodeList toastNodeList = toastXml.GetElementsByTagName("text");
+
+            // add a title and a notification body
             toastNodeList.Item(0).AppendChild(toastXml.CreateTextNode(title));
             toastNodeList.Item(1).AppendChild(toastXml.CreateTextNode(stringContent));
             Windows.Data.Xml.Dom.IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+
+            // set audio property to play on notification
             Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
             audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
 
-            ToastNotification toast = new ToastNotification(toastXml);
-            toast.ExpirationTime = DateTime.Now.AddSeconds(4);
+            ToastNotification toast = new ToastNotification(toastXml)
+            {
+                // set the notification to disappeaar after 4 seconds
+
+                ExpirationTime = DateTime.Now.AddSeconds(4)
+            };
+
+            //display the toast
             ToastNotifier.Show(toast);
         }
-        
-        private void getLocForecast_Click(object sender, RoutedEventArgs e)
+
+        private void GetLocForecast_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
@@ -161,7 +161,7 @@ namespace WeatherForecast
                 prevSearch.Text = "Your last forecast was for " + (string)localSettings.Values["prevSearch"];
                 prevSearch.Visibility = VisibilityPropertyA;
 
-                
+
                 var chosen = (string)localSettings.Values["tempSetting"];
                 // set default selected based on local storage
                 if (chosen == "Kelvin")
@@ -172,7 +172,7 @@ namespace WeatherForecast
                 {
                     tempType.SelectedIndex = 0;
                 }
-               
+
 
             }
             catch
@@ -183,17 +183,18 @@ namespace WeatherForecast
                 prevSearch.Visibility = VisibilityPropertyA;
                 tempType.SelectedIndex = 0;
             }
-            
+
             base.OnNavigatedTo(e);
         }
 
         /*
          drop down box to choose tempeture format, Chosen tempeture will be saved to local storage
           */
-        private void tempType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TempType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Play a sound effect
             App.MyAppSounds.Play(SoundEfxEnum.CLICK);
+
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var comboBoxItem = e.AddedItems[0] as ComboBoxItem;
             if (comboBoxItem == null) return;
@@ -202,12 +203,10 @@ namespace WeatherForecast
             {
                 //save the choice in local storage
                 localSettings.Values["tempSetting"] = content;
-                Debug.WriteLine("DEBUG Degrees selected: ");
             }
             if (content != null && content.Equals("Kelvin"))
             {
                 localSettings.Values["tempSetting"] = content;
-                Debug.WriteLine("DEBUG kelvin selected ");
             }
         }
     }

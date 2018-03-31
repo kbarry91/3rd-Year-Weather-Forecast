@@ -100,7 +100,7 @@ namespace WeatherForecast
                             {
                                 dtime = Result.list[counter].dt_txt,
                                 dayOfWeek = (Convert.ToDateTime(Result.list[counter].dt_txt).DayOfWeek).ToString(),
-                                temp = (Math.Truncate(Result.list[counter].main.temp - tempSetting) * 100) / 100,
+                                temp = (Math.Truncate(Result.list[counter].main.Temp - tempSetting) * 100) / 100,
                                 humidity = Result.list[counter].main.humidity,
                                 desc = Result.list[counter].weather[0].description,
                                 windSpeed = Result.list[counter].wind.speed,

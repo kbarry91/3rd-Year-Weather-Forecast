@@ -11,8 +11,10 @@
         <DataTemplate x:Name="ListViewDataTemplate"  >
 
             <Grid   Margin="10,0,10,0" x:Name="MainGrid">
-                <VisualStateManager.VisualStateGroups>
+                <!-- Visual state manager allows the grid to change format dynamically for different size devices -->
+                    <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup>
+                        
                         <VisualState x:Name="WideState">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="720" />
@@ -27,6 +29,7 @@
                                 <Setter Target="SecondGrid.(Grid.Row)" Value="0"/>
                             </VisualState.Setters>
                         </VisualState>
+                        
                         <VisualState x:Name="NarrowState">
                             <VisualState.StateTriggers>
                                 <AdaptiveTrigger MinWindowWidth="0" />
@@ -41,16 +44,20 @@
                                 <Setter Target="SecondGrid.(Grid.Row)" Value="1"/>
                             </VisualState.Setters>
                         </VisualState>
+                        
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                
                 <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0"  >
                     <StackPanel VerticalAlignment="Center"    >
 
@@ -98,7 +105,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" x:Name="cityBox" HorizontalAlignment="Center" FontSize="50" TextWrapping="Wrap"  ></TextBlock>
 
-            <Pivot x:Name="pvtWeather" Grid.Row="1"   Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="pvtWeather_SelectionChanged" >
+            <Pivot x:Name="pvtWeather" Grid.Row="1"   Margin="100,100,100,100" Height="500" Background="LightBlue"  Foreground="LightPink"    SelectionChanged="PvtWeather_SelectionChanged" >
 
             </Pivot>
         </Grid>

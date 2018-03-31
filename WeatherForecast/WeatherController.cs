@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WeatherForecast
 {
+    /*
+     WeatherController is used to simplify the weather details into a small lightweight object
+     */
     class WeatherController
     {
         public String dtime { get; set; }

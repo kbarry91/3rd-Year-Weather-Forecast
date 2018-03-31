@@ -25,11 +25,13 @@ using Windows.Storage.Streams;
 namespace WeatherForecast
 {
 
-
+    /*
+     WeatherPage is the main weather page that displays all weather forecast data
+     */
     public sealed partial class WeatherPage : Page
     {
-
         Forecast myForecast;
+
         public String SearchCrit { get; set; }
         public String cityCode { get; set; }
         public String cityName { get; set; }
@@ -54,6 +56,7 @@ namespace WeatherForecast
             
           
         }
+
         /// <summary>
         /// BuildweatherAsync is a sync method that populates all the pivot items with the required data
         /// </summary>
@@ -61,9 +64,10 @@ namespace WeatherForecast
         /// <returns>Task</returns>
         public async Task BuildweatherAsync(String cityCode)
         {
-            
+            // load the eather data
             await myForecast.GetWeather(cityCode);
 
+            // Set the appropriate header based on the http response
             if (myForecast.httpSuccess)
             {
                 this.cityName = myForecast.SortedDays[0][0].city;
@@ -74,7 +78,7 @@ namespace WeatherForecast
             }
             cityBox.Text = cityName;
            
-            
+            //populate pivot item with weather data and add to main pivot
             int index = 0;
             foreach (var day in myForecast.SortedDays)
             { 
@@ -88,6 +92,7 @@ namespace WeatherForecast
                 {
                     Header = myForecast.SortedDays[index++][0].dayOfWeek
                 };
+
                 ListView listView = new ListView
                 {
                     ItemsSource = weathers
@@ -97,6 +102,7 @@ namespace WeatherForecast
                 pvtWeather.Items.Add(pivotItem);
 
             }
+            // Instansiate a new Pivot item to hold a map
             var mapPivot = new PivotItem
             {
                 Header = "Map"
@@ -158,12 +164,17 @@ namespace WeatherForecast
             Frame.Navigate(typeof(MainPage));
         }
 
-        
-
-        private void pvtWeather_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void PvtWeather_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Play a sound effect
-            App.MyAppSounds.Play(SoundEfxEnum.SWIPE);
+            try
+            {
+                // Play a sound effect
+                App.MyAppSounds.Play(SoundEfxEnum.SWIPE);
+            }
+            catch
+            {
+                Debug.WriteLine("Failed to play sound");
+            }
         }
     }
 

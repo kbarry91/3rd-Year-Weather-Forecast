@@ -10,7 +10,7 @@ namespace WeatherForecast
 
     public class Main
     {
-        public double temp { get; set; }
+        public double Temp { get; set; }
         public double temp_min { get; set; }
         public double temp_max { get; set; }
         public double pressure { get; set; }
@@ -18,8 +18,6 @@ namespace WeatherForecast
         public double grnd_level { get; set; }
         public int humidity { get; set; }
         public double temp_kf { get; set; }
-
-       
     }
 
     public class Weather
@@ -79,10 +77,7 @@ namespace WeatherForecast
             var myStr = "";
             foreach (var myWeather in weather)
             {
-
-                //  Debug.WriteLine(myWeather.ToString());
                 myStr = myStr + main.ToString() + dt_txt + " " + myWeather.ToString();
-
             }
             return myStr + main.ToString();
         }
@@ -119,7 +114,6 @@ namespace WeatherForecast
             {
                 count++;
                 myStr = myStr + mylist.ToString() + " c " + count + "\n";
-                // Debug.WriteLine(mylist.ToString());
             }
             return myStr;
         }

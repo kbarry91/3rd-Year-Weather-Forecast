@@ -13,8 +13,11 @@ namespace WeatherForecast
         CLICK,
         SWIPE,
         WRONG
-        
     }
+    /*
+     * SoundFx is a utility sound class to load and play various audio files
+     */
+
     public class SoundFx
     {
         private Dictionary<SoundEfxEnum, MediaElement> effects;
@@ -32,11 +35,13 @@ namespace WeatherForecast
             effects.Add(SoundEfxEnum.SWIPE, await LoadSoundFile("swipe.mp3"));
             effects.Add(SoundEfxEnum.WRONG, await LoadSoundFile("wrong.mp3"));
         }
-
+        /*
+         Load the sound files from Assets and return a media element
+         */
         private async Task<MediaElement> LoadSoundFile(string v)
         {
             MediaElement snd = new MediaElement();
-
+            
             snd.AutoPlay = false;
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets");
             StorageFile file = await folder.GetFileAsync(v);
@@ -47,6 +52,7 @@ namespace WeatherForecast
 
         public void Play(SoundEfxEnum efx)
         {
+            
             var mediaElement = effects[efx];
             mediaElement.Play();
         }
