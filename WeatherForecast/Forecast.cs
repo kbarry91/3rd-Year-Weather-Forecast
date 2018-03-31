@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Author : G00339811
+// Module : Mobile Application Developement 
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,17 +27,17 @@ namespace WeatherForecast
         }
 
         /*
-         GetWeather initilizes a Result onject with all of the selected counties data
+         GetWeather initilizes a Result onject with all of the selected countries data.
          */
         public async Task GetWeather(string cCode)
         {
-            // load local storage
+            // Load local storage
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-            // tempSetting represents the forma to convert kelvin to celsius
+            // TempSetting represents the forma to convert kelvin to celsius.
             double tempSetting = 273.15;
 
-            // must confirm with local storage users selected temperature format
+            // Must confirm with local storage users selected temperature format.
             try
             {
                 switch ((string)localSettings.Values["tempSetting"])
@@ -52,7 +55,7 @@ namespace WeatherForecast
             }
             catch
             {
-                // if no local storage value is available do not show the prevSearch textbox 
+                // If no local storage value is available do not show the prevSearch textbox.
                 tempSetting = 1;
             }
 
@@ -61,62 +64,63 @@ namespace WeatherForecast
 
             string url = "http://api.openweathermap.org/data/2.5/forecast?" + cityCode + apiKey;
 
-            // adapted from https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
+            // Adapted from https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
             var uri = new Uri(url);
 
             using (HttpResponseMessage response = await Client.GetAsync(uri))
             {
                 using (IHttpContent content = response.Content)
                 {
-                    // ensure that the httpRequest was a success
+                    // Ensure that the httpRequest was a success.
                     if (response.IsSuccessStatusCode)
                     {
                         this.httpSuccess = true;
                         Debug.WriteLine("DEBUG : content =" + content);
                         var json = await content.ReadAsStringAsync();
-                        // adapted from https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
 
+                        // Adapted from https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
+    
                         Result = JsonConvert.DeserializeObject<RootObject>(json);
 
                         SortedDays = new List<List<WeatherController>>();
 
-                        //create a list of weatherController objects to hold each hourly interval
+                        // Create a list of weatherController objects to hold each hourly interval.
                         List<WeatherController> sortedHours = new List<WeatherController>();
 
-                        // a base time
+                        // A base time.
                         DateTime prevDate = Convert.ToDateTime("2000-01-01");
                         int counter = 0;
 
-                        // iterate through Result list  
-                        for (int i = 0; i < Result.list.Count(); i++)
+                        // iterate through Result list  .
+                        for (int i = 0; i < Result.List.Count(); i++)
                         {
-                            // if the date is greater than the previous date add the sortedHours to SortedDays
-                            if (Convert.ToDateTime(Result.list[counter].dt_txt).Date > prevDate.Date && counter != 0)
+                            // if the date is greater than the previous date add the sortedHours to SortedDays.
+                            if (Convert.ToDateTime(Result.List[counter].Dt_txt).Date > prevDate.Date && counter != 0)
                             {
                                 SortedDays.Add(sortedHours);
                                 sortedHours = new List<WeatherController>();
                             }
                             WeatherController wController = new WeatherController
                             {
-                                dtime = Result.list[counter].dt_txt,
-                                dayOfWeek = (Convert.ToDateTime(Result.list[counter].dt_txt).DayOfWeek).ToString(),
-                                temp = (Math.Truncate(Result.list[counter].main.Temp - tempSetting) * 100) / 100,
-                                humidity = Result.list[counter].main.humidity,
-                                desc = Result.list[counter].weather[0].description,
-                                windSpeed = Result.list[counter].wind.speed,
-                                icon = "http://openweathermap.org/img/w/" + Result.list[counter].weather[0].icon + ".png",
-                                city = Result.city.name,
-                                coLong = Result.city.coord.lon,
-                                coLat = Result.city.coord.lat
+                                Dtime = Result.List[counter].Dt_txt,
+                                DayOfWeek = (Convert.ToDateTime(Result.List[counter].Dt_txt).DayOfWeek).ToString(),
+                                Temp = (Math.Truncate(Result.List[counter].Main.Temp - tempSetting) * 100) / 100,
+                                Humidity = Result.List[counter].Main.Humidity,
+                                Desc = Result.List[counter].Weather[0].Description,
+                                WindSpeed = Result.List[counter].Wind.Speed,
+                                Icon = "http://openweathermap.org/img/w/" + Result.List[counter].Weather[0].Icon + ".png",
+                                City = Result.City.Name,
+                                CoLong = Result.City.Coord.Lon,
+                                CoLat = Result.City.Coord.Lat
                             };
 
                             sortedHours.Add(wController);
 
-                            prevDate = Convert.ToDateTime(Result.list[counter].dt_txt);
+                            prevDate = Convert.ToDateTime(Result.List[counter].Dt_txt);
                             counter++;
                         }
 
-                        // add any left over sortedHours to SortedDays
+                        // Add any left over sortedHours to SortedDays.
                         if (sortedHours != null)
                         {
                             SortedDays.Add(sortedHours);

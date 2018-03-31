@@ -11,7 +11,9 @@
         <DataTemplate x:Name="ListViewDataTemplate"  >
 
             <Grid   Margin="10,0,10,0" x:Name="MainGrid">
+                
                 <!-- Visual state manager allows the grid to change format dynamically for different size devices -->
+                <!-- On large screen devices each forecast will be horizontal, on mobile devices will be vertical -->
                     <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup>
                         
@@ -63,33 +65,33 @@
 
                         <StackPanel Orientation="Horizontal">
                             
-                            <TextBlock  Text="{Binding dtime}" FontWeight="Bold"></TextBlock>
+                            <TextBlock  Text="{Binding Dtime}" FontWeight="Bold"></TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock HorizontalAlignment="Stretch" FontWeight="Bold" Text="Temperature: " ></TextBlock>
-                            <TextBlock   Text="{Binding temp}"></TextBlock>
+                            <TextBlock   Text="{Binding Temp}"></TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock  Text="Description : " FontWeight="Bold"></TextBlock>
-                            <TextBlock Text="{Binding desc}"></TextBlock>
+                            <TextBlock Text="{Binding Desc}"></TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Humidity : " FontWeight="Bold"></TextBlock>
-                            <TextBlock Text="{Binding humidity}"></TextBlock>
+                            <TextBlock Text="{Binding Humidity}"></TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Windspeed : " FontWeight="Bold"></TextBlock>
-                            <TextBlock Text="{Binding windSpeed}"></TextBlock>
+                            <TextBlock Text="{Binding WindSpeed}"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
                 
                 <Grid x:Name="SecondGrid" Grid.Column="1" Grid.Row="0"  >
-                    <Image Source="{Binding icon}" Stretch="fill" Height="100" Width="150" Margin="20" />
+                    <Image Source="{Binding Icon}" Stretch="fill" Height="100" Width="150" Margin="20" />
                 </Grid>
 
             </Grid>

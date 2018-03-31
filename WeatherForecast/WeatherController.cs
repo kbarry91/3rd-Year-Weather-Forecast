@@ -7,28 +7,27 @@ using System.Threading.Tasks;
 namespace WeatherForecast
 {
     /*
-     WeatherController is used to simplify the weather details into a small lightweight object
-     */
+     * WeatherController is used to simplify the weather details into a small lightweight object.
+    */
     class WeatherController
     {
-        public String dtime { get; set; }
-        public String dayOfWeek { get; set; }
-        public double temp { get; set; }
-        public int humidity { get; set; }
-        public String desc { get; set; }
-        public double windSpeed { get; set; }
-        public String icon { get; set; }
-        public String city { get; set; }
-        public double coLong { get; set; }
-        public double coLat { get; set; }
-        public WeatherController()
-        {
+        public String Dtime { get; set; }
+        public String DayOfWeek { get; set; }
+        public double Temp { get; set; }
+        public int Humidity { get; set; }
+        public String Desc { get; set; }
+        public double WindSpeed { get; set; }
+        public String Icon { get; set; }
+        public String City { get; set; }
+        public double CoLong { get; set; }
+        public double CoLat { get; set; }
 
-        }
+        public WeatherController() { }
+
         override
             public String ToString()
         {
-            return "DAY:" + dayOfWeek + " dtime:" + dtime + " temp:" + temp + " humidity:" + humidity + " desc:" + desc + " windpeed:" + windSpeed;
+            return "DAY:" + DayOfWeek + " dtime:" + Dtime + " temp:" + Temp + " humidity:" + Humidity + " desc:" + Desc + " windpeed:" + WindSpeed;
         }
     }
 }
