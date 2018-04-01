@@ -10,7 +10,7 @@
     <Page.Resources>
         <DataTemplate x:Name="ListViewDataTemplate"  >
 
-            <Grid   Margin="10,0,10,0" x:Name="MainGrid">
+            <Grid   Margin="20,20,20,20" x:Name="MainGrid" Background="SkyBlue">
                 
                 <!-- Visual state manager allows the grid to change format dynamically for different size devices -->
                 <!-- On large screen devices each forecast will be horizontal, on mobile devices will be vertical -->
