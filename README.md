@@ -1,7 +1,8 @@
 # My Weather Forecast
+![My Weather Forecast](https://github.com/kbarry91/Weather-Forecast/blob/master/WeatherForecast/Assets/AppWide310x150Logo.scale-200.png)
 A weather forecast UWP app that uses the openweathermap API to  retrieve weather details. This application gives the user a 5day weather forecast and for each day, there is a forecast for every 3 hour interval. My Weather Forecast can give a forecast for any city world wide. A city forecast can be found by either searching the name of the city or by using the built in location service to get a forecast for your current loocation. A map also shows the user the forecast in their loaction on the map.
 
-### Motivation
+## Motivation
 
 My Weather Forecast was developed as a project for the module Mobile Application Developement as part of a Software Developement Degree in GMIT.
 
@@ -14,9 +15,8 @@ For this reason I developed the app with a interactive ,simple to use, user inte
 
 
 ### Prerequisities
-https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio
 In order to debug this Application you must have **Visual Studio 2017** installed.
-(https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio "How to install Visual Studio ")
+[How to install Visual Studio](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio )
 
 ## Getting Started
 
@@ -26,7 +26,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### Open The Project in Visual Studio
 
-###### Using the zip file
+##### Using the zip file
 - Go to (https://github.com/kbarry91/Weather-Forecast.git)
 - Select to *Download Zip*
 - Unzip the full folder
