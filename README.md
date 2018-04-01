@@ -68,7 +68,7 @@ These instructions will get you a copy of the project up and running on your loc
 3. Enter a valid name eg 'Dubai'
 4. The Forecast page will launch with a 5 day forecast
 
-### Get Forecast by City Name
+### Get Forecast by Location
 1. Select 'Get Your Current Location'
 2. Allow pemission to Location
 3. A Toast notification will display while the app awaits permission
