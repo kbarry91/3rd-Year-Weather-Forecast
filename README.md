@@ -27,7 +27,7 @@ In order to debug this Application you must have **Visual Studio 2017** installe
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### How to Run and Debug the Device using Visual Studio
+### How to Run and Debug the Project using Visual Studio
 
 #### Open The Project in Visual Studio
 
