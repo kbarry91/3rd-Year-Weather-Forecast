@@ -1,90 +1,96 @@
-# Weather-Forecast
-A weather forecast UWP app that uses the openweathermap API to get retrieve weather details.
-
-A program written in Golang that can build a non-deterministic finite automaton (NFA) from a regular expression and check it against any given string.
-
-### Synopsis
-
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+# My Weather Forecast
+A weather forecast UWP app that uses the openweathermap API to  retrieve weather details. This application gives the user a 5day weather forecast and for each day, there is a forecast for every 3 hour interval. My Weather Forecast can give a forecast for any city world wide. A city forecast can be found by either searching the name of the city or by using the built in location service to get a forecast for your current loocation. A map also shows the user the forecast in their loaction on the map.
 
 ### Motivation
 
-This program was developed as a project for the Module 'Graph Theory'.
+My Weather Forecast was developed as a project for the module Mobile Application Developement as part of a Software Developement Degree in GMIT.
+
+## Design Process
+I spent alot of time looking at other Applications on the store that where similar to this and I found the same issue with all of them, a messy user interface, hard to navigate and overly complex to the everyday user. 
+
+Although the app is useable for all ages , I felt the market for the app would be towards the older and less tech-savy poplutaion. This helped me answer the question *why will the user open this app for a second time* answer *because its easy to use, fit for purpose and straight to the point* .
+
+For this reason I developed the app with a interactive ,simple to use, user interface that hides all the background complexity of the program from the user. I chose brights colours so all information is easliy viewed. To make this App stand out on the store I created a simplistic yet informative image that draws the user to the app and also gives the user an idea of what the app does before they even open it.
+
+
+### Prerequisities
+https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio
+In order to debug this Application you must have **Visual Studio 2017** installed.
+(https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio "How to install Visual Studio ")
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisities
+### How to Run and Debug the Device using Visual Studio
 
-What things you need to install the software and how to install them
+#### Open The Project in Visual Studio
 
-```
-Give examples
-```
+###### Using the zip file
+- Go to (https://github.com/kbarry91/Weather-Forecast.git)
+- Select to *Download Zip*
+- Unzip the full folder
+- Open visual studio
+- Navigate to 
+> File > Open > Project Solution
+- Select the unzipped solution
 
-### Installing Required Softwares
+##### Alternativily using GIT
+- Ensure Git is installed https://git-scm.com/downloads
+- Create a new Project
+> File > New > Project > Visual c# > Blank App (Universal Windows)
+- Set up a git repository
+- Navigate to directory of project in CMD
+>Git init
+>Git remote add origin https://github.com/kbarry91/Weather-Forecast.git
+>Git pull origin master
 
-
-
-A step by step series of examples that tell you have to get a development env running
-
-Stay what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Example Use
-
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
+#### Run The application in Visual Studio
+- Set the *Solution Configuration* to **debug** 
+- Select *Solution platform*
+- Click **Run on local Machine**
+- The application will now launch
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+1. Launch the App
+2. Select the temperature format from the drop down menu (kelvin or celcius)
 
-### Break down into end to end tests
+### Get Forecast by City Name
+1. Enter an invalid City name eg 'no'
+2. An error message will appear 
+>Please enter a city name
+3. Enter a valid name eg 'Dubai'
+4. The Forecast page will launch with a 5 day forecast
 
-Explain what these tests test and why
+### Get Forecast by City Name
+1. Select 'Get Your Current Location'
+2. Allow pemission to Location
+3. A Toast notification will display while the app awaits permission
+4. A new button will appear select 'Get The Forecast For Your Current Location'
+5. The Forecast page will launch with a 5 day forecast
 
-```
-Give an example
-```
 
-## Deployment
+## Built using
 
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* Dropwizard - Bla bla bla
-* Maven - Maybe
-* Atom - ergaerga
+* Visual Studio 2017
+* Paint.net
+* Visual Studio Code
+* Notepad++
 
 
 ## Research 
 
-Quick  paragraph abot how I researched the problem
+In order to develope this application alot of effort went into research as UWP was a new platform to me. The microsoft docs available at https://docs.microsoft.com/en-us/windows/uwp/ provided alot of insight as to how this app could be developed. Any code adapted from external sources has been clearly referenced through the code files.
+
 
 ## Authors
 
 * **Kevin Barry** - *Initial work* - [kbarry91](https://github.com/kbarry91)
 
-## License
-
-This project is licensed under the 
 
 ## Acknowledgments & References
-* Hat tip to anyone who's code was used
-* Inspiration
+* Lecturer Damien Costello of GMIT 
 * Getting json from  url : https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
-* Parsing json in uwp https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
+* Parsing json in uwp : https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
+* Open weather map API  : http://openweathermap.org/
