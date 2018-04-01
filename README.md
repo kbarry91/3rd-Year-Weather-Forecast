@@ -75,6 +75,9 @@ These instructions will get you a copy of the project up and running on your loc
 4. A new button will appear select 'Get The Forecast For Your Current Location'
 5. The Forecast page will launch with a 5 day forecast
 
+City Search           |  Location Search
+:-------------------------:|:-------------------------:
+<a href="https://imgur.com/gnFR2JN"><img src="https://i.imgur.com/gnFR2JN.gif" title="source: imgur.com" /></a> | <a href="https://imgur.com/qFd3EfF"><img src="https://i.imgur.com/qFd3EfF.gif" title="source: imgur.com" /></a>
 
 ## Built using
 
