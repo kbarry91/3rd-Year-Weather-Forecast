@@ -1,5 +1,10 @@
-# My Weather Forecast
-![My Weather Forecast](https://github.com/kbarry91/Weather-Forecast/blob/master/WeatherForecast/Assets/AppWide310x150Logo.scale-200.png)
+
+
+
+<p align="center">
+  <img src = "https://github.com/kbarry91/Weather-Forecast/blob/master/WeatherForecast/Assets/AppWide310x150Logo.scale-200.png"/>
+</p>
+
 A weather forecast UWP app that uses the openweathermap API to  retrieve weather details. This application gives the user a 5day weather forecast and for each day, there is a forecast for every 3 hour interval. My Weather Forecast can give a forecast for any city world wide. A city forecast can be found by either searching the name of the city or by using the built in location service to get a forecast for your current loocation. A map also shows the user the forecast in their loaction on the map.
 
 ## Motivation
@@ -88,6 +93,10 @@ In order to develope this application alot of effort went into research as UWP w
 
 * **Kevin Barry** - *Initial work* - [kbarry91](https://github.com/kbarry91)
 
+## Privacy Policy
+* In order to pass verification on the Microsft store I had to obide by all legal requirements.
+* Click the link below to view the privacy policy
+* [My Weather Forecast privacy policy](https://www.dropbox.com/s/e9zudqsho2a1py3/privacyPolicy.html?dl=0)
 
 ## Acknowledgments & References
 * Lecturer Damien Costello of GMIT 
