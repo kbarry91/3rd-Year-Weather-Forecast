@@ -7,7 +7,7 @@
 - [Introduction](#introduction)
 - [Motivation](#motivation)
 - [Design Process](#design-process)
-  * [Prerequisities](#prerequisities)
+- [Prerequisities](#prerequisities)
 - [Getting Started](#getting-started)
   * [How to Run and Debug the Project using Visual Studio](#how-to-run-and-debug-the-project-using-visual-studio)
     + [Open The Project in Visual Studio](#open-the-project-in-visual-studio)
@@ -39,7 +39,7 @@ Although the app is useable for all ages , I felt the market for the app would b
 For this reason I developed the app with a interactive ,simple to use, user interface that hides all the background complexity of the program from the user. I chose brights colours so all information is easliy viewed. To make this App stand out on the store I created a simplistic yet informative image that draws the user to the app and also gives the user an idea of what the app does before they even open it.
 
 
-### Prerequisities
+## Prerequisities
 In order to debug this Application you must have **Visual Studio 2017** installed.
 [How to install Visual Studio](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio )
 
