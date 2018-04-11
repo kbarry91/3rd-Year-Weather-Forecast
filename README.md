@@ -1,10 +1,30 @@
-
-
-
 <p align="center">
   <img src = "https://github.com/kbarry91/Weather-Forecast/blob/master/WeatherForecast/Assets/AppWide310x150Logo.scale-200.png"/>
 </p>
 
+# !!!! NOW AVAILABLE ON WINDOWS STORE !!!!
+
+- [Introduction](#introduction)
+- [Motivation](#motivation)
+- [Design Process](#design-process)
+  * [Prerequisities](#prerequisities)
+- [Getting Started](#getting-started)
+  * [How to Run and Debug the Project using Visual Studio](#how-to-run-and-debug-the-project-using-visual-studio)
+    + [Open The Project in Visual Studio](#open-the-project-in-visual-studio)
+      - [Using the zip file](#using-the-zip-file)
+      - [Alternativily using GIT](#alternativily-using-git)
+    + [Run The application in Visual Studio](#run-the-application-in-visual-studio)
+- [Running the tests](#running-the-tests)
+  * [Get Forecast by City Name](#get-forecast-by-city-name)
+  * [Get Forecast by Location](#get-forecast-by-location)
+- [Built using](#built-using)
+- [Windows Store](#windows-store)
+- [Research](#research)
+- [Authors](#authors)
+- [Privacy Policy](#privacy-policy)
+- [Acknowledgments & References](#acknowledgments-and-references)
+
+## Introduction
 A weather forecast UWP app that uses the openweathermap API to  retrieve weather details. This application gives the user a 5day weather forecast and for each day, there is a forecast for every 3 hour interval. My Weather Forecast can give a forecast for any city world wide. A city forecast can be found by either searching the name of the city or by using the built in location service to get a forecast for your current loocation. A map also shows the user the forecast in their loaction on the map.
 
 ## Motivation
@@ -86,6 +106,17 @@ City Search           |  Location Search
 * Visual Studio Code
 * Notepad++
 
+## Windows Store
+This product is now fully certified and published in 241 countries on the Windows Store.
+The first submission was Declined for 2 reasons.
+
+1. China Bing Maps . Due to legistation in China the usage of bings map was not allowed. To solve the issue the app was taken off the market in China.
+2. Privacy Policy . Because the app accesses personal information of the users location, I had to create and host a privacy policy    [My Weather Forecast privacy policy](https://www.dropbox.com/s/e9zudqsho2a1py3/privacyPolicy.html?dl=0)
+
+Once these issues were corrected I resubmitted my application and withen a few days the app passed certification and is now available to download on the Windows Store. [Link To Certificate](https://web.iarcservices.com/Dashboard/Certificate/e9f849a7-4447-4e83-b94f-fdf546adfda1)
+
+<p align="center">
+<a href="https://imgur.com/XtoOvHJ"><img src="https://i.imgur.com/XtoOvHJ.png" title="source: imgur.com" /></a></p>
 
 ## Research 
 
@@ -101,7 +132,7 @@ In order to develope this application alot of effort went into research as UWP w
 * Click the link below to view the privacy policy
 * [My Weather Forecast privacy policy](https://www.dropbox.com/s/e9zudqsho2a1py3/privacyPolicy.html?dl=0)
 
-## Acknowledgments & References
+## Acknowledgments And References
 * Lecturer Damien Costello of GMIT 
 * Getting json from  url : https://stackoverflow.com/questions/5566942/how-to-get-a-json-string-from-url
 * Parsing json in uwp : https://stackoverflow.com/questions/36516146/parsing-json-in-uwp
