@@ -4,6 +4,8 @@
 
 # !!!! NOW AVAILABLE ON WINDOWS STORE !!!!
 
+## https://www.microsoft.com/en-ie/store/p/my-weather-forecast/9nd1v7kjwx4p
+
 - [Introduction](#introduction)
 - [Motivation](#motivation)
 - [Design Process](#design-process)
@@ -42,6 +44,8 @@ For this reason I developed the app with a interactive ,simple to use, user inte
 ## Prerequisities
 In order to debug this Application you must have **Visual Studio 2017** installed.
 [How to install Visual Studio](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio )
+
+Alternatively for users of Windows PC , Windows Phone or Xbox the product can be downloaded free on the windows store at https://www.microsoft.com/en-ie/store/p/my-weather-forecast/9nd1v7kjwx4p
 
 ## Getting Started
 
@@ -107,7 +111,8 @@ City Search           |  Location Search
 * Notepad++
 
 ## Windows Store
-This product is now fully certified and published in 241 countries on the Windows Store.
+The application is available on the windows store here https://www.microsoft.com/en-ie/store/p/my-weather-forecast/9nd1v7kjwx4p
+This product is now fully certified and published in 241 countries on the Windows Store. My weather forecast has been tested and is available on Windows pc, Windows Phone and Xbox.
 The first submission was Declined for 2 reasons.
 
 1. China Bing Maps . Due to legistation in China the usage of bings map was not allowed. To solve the issue the app was taken off the market in China.
@@ -130,7 +135,7 @@ In order to develope this application alot of effort went into research as UWP w
 ## Privacy Policy
 * In order to pass verification on the Microsft store I had to obide by all legal requirements.
 * Click the link below to view the privacy policy
-* [My Weather Forecast privacy policy](https://www.dropbox.com/s/e9zudqsho2a1py3/privacyPolicy.html?dl=0)
+* [My Weather Forecast privacy policy](https://github.com/kbarry91/Weather-Forecast_Privacy-Policy)
 
 ## Acknowledgments And References
 * Lecturer Damien Costello of GMIT 
