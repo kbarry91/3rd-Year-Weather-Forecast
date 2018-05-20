@@ -5,47 +5,56 @@
     xmlns:local="using:WeatherForecast"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d">
 
-   
-        <Grid Background="LightBlue" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            
-            <StackPanel>
-                <TextBlock x:Name="titleBar"  Text="My Forecast" Foreground="MidnightBlue"  Margin="0,20,0,1" FontSize="40" HorizontalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="tempType" Header="Temperature format" Width="200" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
-                    <ComboBoxItem x:Name="cel" Content="Celsius"/>
-                    <ComboBoxItem x:Name="kel" Content="Kelvin" />
-                </ComboBox>
-                
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBox x:Name="cityInput" Width="200" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
-                    <Button x:Name="cityButton" Margin="0,5,0,0" Width="200" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
-                    <TextBlock x:Name="errorBox" Visibility="Collapsed" Text="Please enter a city name" Foreground="Red" ></TextBlock>
-                </StackPanel>
-                
-                <StackPanel>
-                    <Button x:Name="getLocation" Width="200" Height="35" Tapped="getLocation_Tapped" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">Get Your Current Location</Button>
-                    <TextBlock x:Name="userLocation" Visibility="Collapsed"  Foreground="Blue" HorizontalAlignment="Center" ></TextBlock>
-                    <Button x:Name="getLocForecast" Width="200" Height="50" Visibility="Collapsed" Click="getLocForecast_Click" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">
-                        <TextBlock Text="Get the Forecast for your current location"  TextWrapping="Wrap" TextAlignment="Center"/>
-                    </Button>
-                </StackPanel>
-                
-                <StackPanel>
-                    <TextBlock x:Name="prevSearch" HorizontalAlignment="Center" Visibility="{Binding VisibilityPropertyA}" Text="Previous Search" Height="324" Margin="0,20,0,0" ></TextBlock>
-                </StackPanel>
-                
+
+    <Grid Background="LightBlue" ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+        <StackPanel>
+            <TextBlock x:Name="titleBar"  Text="My Forecast" Foreground="MidnightBlue"  Margin="0,20,0,1" FontSize="40" HorizontalAlignment="Center"></TextBlock>
+            <ComboBox x:Name="tempType" Header="Temperature format" Width="200" HorizontalAlignment="Center"  SelectionChanged="tempType_SelectionChanged">
+                <ComboBoxItem x:Name="cel" Content="Celsius"/>
+                <ComboBoxItem x:Name="kel" Content="Kelvin" />
+            </ComboBox>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBox x:Name="cityInput" Width="200" Height="100" Header="Choose City" PlaceholderText="Enter City here.."  HorizontalAlignment="Center" Text="{Binding userCity}"/>
+                <Button x:Name="cityButton" Margin="0,5,0,0" Width="200" Tapped="cityButton_Tapped" HorizontalAlignment="Center" Background="DeepSkyBlue" BorderBrush="MidnightBlue">Search for city</Button>
+                <TextBlock x:Name="errorBox" Visibility="Collapsed" Text="Please enter a city name" Foreground="Red" ></TextBlock>
             </StackPanel>
-            
-            <Button Content="About " VerticalAlignment="Bottom" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,10">
-                <Button.Flyout>
-                    <Flyout>
+
+            <StackPanel>
+                <Button x:Name="getLocation" Width="200" Height="35" Tapped="getLocation_Tapped" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">Get Your Current Location</Button>
+                <TextBlock x:Name="userLocation" Visibility="Collapsed"  Foreground="Blue" HorizontalAlignment="Center" ></TextBlock>
+                <Button x:Name="getLocForecast" Width="200" Height="50" Visibility="Collapsed" Click="getLocForecast_Click" Background="DeepSkyBlue" BorderBrush="MidnightBlue" HorizontalAlignment="Center" Margin="0,50,0,0">
+                    <TextBlock Text="Get the Forecast for your current location"  TextWrapping="Wrap" TextAlignment="Center"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock x:Name="prevSearch" HorizontalAlignment="Center" Visibility="{Binding VisibilityPropertyA}" Text="Previous Search" Height="20" Margin="0,20,0,0" ></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <UI:AdControl ApplicationId="9nd1v7kjwx4p"
+                               Margin="0,20,0,0"
+                    AdUnitId="1100022671"
+                    HorizontalAlignment="Center"
+                    Height="250"
+                    VerticalAlignment="Top"
+                    Width="300"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Button Content="About " VerticalAlignment="Bottom" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,10">
+            <Button.Flyout>
+                <Flyout>
                     <StackPanel HorizontalAlignment="Stretch">
-                        
+
                         <StackPanel>
                             <TextBlock Text="My Forecast" FontWeight="Bold" HorizontalAlignment="Center"/>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock HorizontalAlignment="Center"  Text="With My Forecast you can now get the latest weather updates."  FontWeight="SemiBold" FontStyle="Italic" FontSize="12"/>
                             <TextBlock HorizontalAlignment="Center" Text="My Forecast gives a 5 day weather forecast."  FontWeight="SemiBold" FontStyle="Italic" FontSize="12"/>
@@ -57,32 +66,32 @@
                             <TextBlock Text="Temperature  Settings"  FontWeight="Bold" FontSize="12"/>
                             <TextBlock Text="Choose to view in Celsius or Kelvin" FontSize="12"/>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="City Search"  FontWeight="Bold" FontSize="12"/>
                             <TextBlock Text="Enter any city name to get a forecast for that city" FontSize="12" />
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Location Search"  FontWeight="Bold" FontSize="12"/>
                             <TextBlock Text="Get your current co-ordinates and retrieve the forecast" FontSize="12"/>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Storage"  FontWeight="Bold" FontSize="12"/>
                             <TextBlock Text="Chosen Temperature setting is saved for next use" FontSize="12"/>
                             <TextBlock Text="Your most recent Forecast is saved" FontSize="12"/>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Map"  FontWeight="Bold" FontSize="12"/>
                             <TextBlock Text="A map is available to show the weather in your location" FontSize="12"/>
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </Flyout>
-                </Button.Flyout>
-            </Button>
-            
-        </Grid>
+            </Button.Flyout>
+        </Button>
+
+    </Grid>
 </Page>
